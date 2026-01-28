@@ -1787,6 +1787,58 @@
   }
 
 }
+    /* ===============================
+   Mobile: SKILL 정렬/여백 최종
+================================ */
+@media (max-width: 980px){
+
+  /* 공통: 2열 레이아웃 유지 */
+  .win-body{
+    display:flex !important;
+    align-items:flex-start;
+    gap:16px !important;
+  }
+  .win-list, .win-point{
+    width:50% !important;
+  }
+
+  /* ✅ Design: 흰(리스트) 왼쪽 / 민트(포인트) 오른쪽 */
+  .win-design .win-list{ order:1; margin-top:-10px !important; } /* -10px */
+  .win-design .win-point{ order:2; text-align:left; }
+
+  /* ✅ Publishing: 흰(리스트) 왼쪽 / 민트(포인트) 오른쪽 */
+  .win-pub .win-list{ order:1; margin-top:10px !important; }   /* +10px */
+  .win-pub .win-point{ order:2; text-align:left; }
+
+  /* 줄바꿈/삐져나옴 방지 */
+  .win-point{ white-space:normal !important; }
+}
+/* Mobile: 2섹션 흔들림/떠있음 방지 */
+@media (max-width: 980px){
+  .sec2-right{ margin-top:0 !important; }
+  .sec-2 .sec2-bg{ display:none !important; } /* 배경 이미지는 이미 삭제했다면 유지용 */
+  .sec2-left, .sec2-right{
+    transition:none !important;
+    transform:none !important;
+    opacity:1 !important;
+  }
+}
+
+/* Mobile: 섹션1 Next 화살표를 섹션1 하단에 고정 */
+@media (max-width: 980px){
+  .sec-1{ position:relative; }
+
+  .sec1-arrow{
+    position:absolute !important;
+    left:50%;
+    bottom:14px;
+    transform:translateX(-50%) !important;
+    margin-top:0 !important;
+  }
+
+  /* 화살표가 가려지지 않게 섹션1 아래 여백 확보 */
+  .sec-1{ padding-bottom:72px !important; }
+}
 
   </style>
 
@@ -2096,6 +2148,26 @@ if (window.matchMedia('(max-width: 980px)').matches) {
   });
 
   // 모바일에서는 더 이상 아래 JS 실행 안 함
+  return;
+}
+/* ===============================
+   Mobile: 섹션1~2 스크롤 연동/등장 애니메이션 비활성화
+================================ */
+if (window.matchMedia('(max-width: 980px)').matches) {
+
+  // 1) 섹션2 텍스트/프로필 고정 표시
+  $('.sec-2').addClass('active');
+  $('.sec2-left, .sec2-right').css({ opacity: 1, transform: 'none' });
+
+  // 2) 섹션1 배경 위치 변수 고정(혹시 사용 중이면)
+  var sec1 = document.querySelector('.sec-1');
+  if (sec1) sec1.style.setProperty('--bgY', '50%');
+
+  // 3) 섹션2 배경 이동 변수 고정(있어도 0으로)
+  var sec2Img = document.querySelector('.sec-2 .sec2-bg img');
+  if (sec2Img) sec2Img.style.setProperty('--imgY', '0px');
+
+  // 4) 모바일에서는 스크롤 기반 애니메이션/토글 실행하지 않음
   return;
 }
 
@@ -2449,6 +2521,7 @@ if (window.matchMedia('(max-width: 980px)').matches) {
 </main>
 </body>
 </html>
+
 
 
 
