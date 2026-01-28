@@ -1405,7 +1405,37 @@
   .sec5-contact{ margin-top:70px; gap:14px; }
   .contact-item{ font-size:15px; }
 }
+/* ===============================
+   Mobile: Section 1 배경 완전 검정
+================================ */
+@media (max-width: 980px){
 
+  .sec-1{
+    background:#1a1a1a;
+  }
+
+  /* 좌우 분할 배경 제거 */
+  .sec-1::before{
+    background:#1a1a1a !important;
+  }
+
+  /* 혹시 남아있는 레이어 완전 제거 */
+  .sec-1::after{
+    display:none !important;
+    content:none !important;
+  }
+
+}
+@media (max-width: 980px){
+
+  .sec2-left,
+  .sec2-right{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+
+}
   </style>
 
   <script src="script/jquery-3.6.2.min.js"></script>
@@ -1690,6 +1720,32 @@ $(document).on('click', '#skillModal .win-icons .i-close', function(e){
   e.stopPropagation();
   spawnHeart(this);  // ✅ jQuery 객체 말고 DOM 요소로 전달
 });
+/* ===============================
+   Mobile: Section 2 JS 비활성화
+================================ */
+if (window.matchMedia('(max-width: 980px)').matches) {
+
+  // 1) sec-2 관련 active 클래스 제거
+  $('.sec-2').removeClass('active');
+
+  // 2) 스크롤 이벤트 전부 제거
+  $(window).off('scroll');
+
+  // 3) 배경 이미지 위치 고정
+  $('.sec-2 .sec2-bg img').css({
+    top: '0',
+    transform: 'none'
+  });
+
+  // 4) 애니메이션 강제 초기화
+  $('.sec2-left, .sec2-right').css({
+    opacity: 1,
+    transform: 'none'
+  });
+
+  // 모바일에서는 더 이상 아래 JS 실행 안 함
+  return;
+}
 
   });
   </script>
@@ -2041,6 +2097,7 @@ $(document).on('click', '#skillModal .win-icons .i-close', function(e){
 </main>
 </body>
 </html>
+
 
 
 
