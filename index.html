@@ -1839,7 +1839,49 @@
   /* 화살표가 가려지지 않게 섹션1 아래 여백 확보 */
   .sec-1{ padding-bottom:72px !important; }
 }
+@media (max-width: 980px){
+  .sec1-arrow,
+  .sec2-arrow{
+    display:none !important;
+  }
+}
+@media (max-width: 980px){
 
+  /* 1섹션이 100vh로 고정되면 간격이 절대 안 줄어듦 → 모바일은 auto로 */
+  .sec-1{
+    height:auto !important;
+    min-height:0 !important;
+    padding:70px 0 24px !important; /* 필요시 조절 */
+  }
+
+  /* 1섹션 네비가 bottom:-550px라서 섹션이 길어짐 → 모바일은 일반 흐름으로 */
+  .navi{
+    position:static !important;
+    left:auto !important;
+    bottom:auto !important;
+    transform:none !important;
+
+    margin-top:28px !important;
+    gap:18px !important;
+    justify-content:flex-start !important;
+    flex-wrap:wrap;
+  }
+}
+@media (max-width: 980px){
+  .sec2-right{
+    margin-top:0 !important; /* PC용 -200px 제거 */
+  }
+
+  .sec2-left,
+  .sec2-right{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+}
+@media (max-width: 980px){
+  .sec-1{ padding-top:48px !important; }
+}
   </style>
 
   <script src="script/jquery-3.6.2.min.js"></script>
@@ -1847,6 +1889,18 @@
 
   <script>
   $(function(){
+
+      /* ✅ Mobile: 섹션1~2 스크롤 연동/active 토글 전부 비활성화 */
+  if (window.matchMedia('(max-width: 980px)').matches) {
+    $(window).off('scroll');                 // 혹시 걸린 스크롤 이벤트 제거
+    $('.sec-2').addClass('active');          // 내용은 그냥 보이게
+    $('.sec2-left, .sec2-right').css({
+      opacity: 1,
+      transform: 'none',
+      transition: 'none'
+    });
+    return;                                  // 모바일은 여기서 종료
+  }
     /* ===============================
    Mobile: Section 2 JS 비활성화
 ================================ */
@@ -2522,6 +2576,7 @@ $(document).on('click', '#skillModal .win-icons .i-close', function(e){
 </main>
 </body>
 </html>
+
 
 
 
