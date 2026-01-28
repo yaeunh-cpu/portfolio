@@ -1621,6 +1621,86 @@
   }
 
 }
+/* Mobile: 4섹션 모바일 목업 내부 보더 소량 축소 */
+@media (max-width: 980px){
+  .device-phone .device-screen{
+    border-radius:36px 36px 0 0;
+  }
+}
+    /* Mobile: 4섹션 모바일 목업 내부 보더 소량 축소 */
+@media (max-width: 980px){
+  .device-phone .device-screen{
+    border-radius:36px 36px 0 0;
+  }
+}
+    @media (max-width: 980px){
+  .sec-1{ padding-bottom:22px !important; }
+  .sec-2{ padding-top:22px !important; }
+}
+@media (max-width: 980px){
+
+  /* 프레임: 화면 밖으로 안 나가게 */
+  .skill-frame{
+    width:94vw !important;
+    height:auto !important;
+    max-height:82vh !important;  /* 너무 길면 내부 스크롤 */
+    overflow:auto !important;
+  }
+
+  .skill-frame-body{
+    padding:14px 12px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    gap:12px !important;
+  }
+
+  /* 내부 창: 겹침 제거 + 폭 고정 */
+  .win{
+    position:relative !important;
+    left:auto !important; top:auto !important; right:auto !important;
+    width:100% !important;
+    height:auto !important;
+    transform:none !important;
+  }
+
+  /* 바(제목줄) 높이/타이포 축소 */
+  .skill-frame-bar{ height:46px !important; }
+  .skill-frame-title{ font-size:16px !important; }
+
+  .win-bar{ height:40px !important; }
+  .win-title{ font-size:16px !important; }
+
+  /* 본문 글자 더 축소 */
+  .win-body{ padding:12px 12px 10px !important; }
+  .win-list{ padding-left:18px !important; }
+
+  .win-list li{
+    font-size:13px !important;
+    margin:6px 0 !important;
+    line-height:1.55 !important;
+  }
+
+  .win-point{
+    font-size:13px !important;
+    line-height:1.55 !important;
+    white-space:normal !important; /* 줄바꿈 허용해서 짤림 방지 */
+  }
+
+  /* 아이콘도 조금 줄여서 공간 확보 */
+  .win-icons span{
+    width:12px !important;
+    height:12px !important;
+  }
+
+  /* Detail 링크가 가로로 튀는 문제 방지 */
+  .detail-link{
+    padding-left:0 !important;
+    font-size:18px !important;
+    width:auto !important;
+    height:auto !important;
+    margin:0 !important;
+  }
+}
 
   </style>
 
@@ -2283,6 +2363,7 @@ if (window.matchMedia('(max-width: 980px)').matches) {
 </main>
 </body>
 </html>
+
 
 
 
