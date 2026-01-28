@@ -1901,52 +1901,6 @@
     });
     return;                                  // 모바일은 여기서 종료
   }
-    /* ===============================
-   Mobile: Section 2 JS 비활성화
-================================ */
-if (window.matchMedia('(max-width: 980px)').matches) {
-
-  // 1) sec-2 관련 active 클래스 제거
-  $('.sec-2').removeClass('active');
-
-  // 2) 스크롤 이벤트 전부 제거
-  $(window).off('scroll');
-
-  // 3) 배경 이미지 위치 고정
-  $('.sec-2 .sec2-bg img').css({
-    top: '0',
-    transform: 'none'
-  });
-
-  // 4) 애니메이션 강제 초기화
-  $('.sec2-left, .sec2-right').css({
-    opacity: 1,
-    transform: 'none'
-  });
-
-  // 모바일에서는 더 이상 아래 JS 실행 안 함
-  return;
-}
-/* ===============================
-   Mobile: 섹션1~2 스크롤 연동/등장 애니메이션 비활성화
-================================ */
-if (window.matchMedia('(max-width: 980px)').matches) {
-
-  // 1) 섹션2 텍스트/프로필 고정 표시
-  $('.sec-2').addClass('active');
-  $('.sec2-left, .sec2-right').css({ opacity: 1, transform: 'none' });
-
-  // 2) 섹션1 배경 위치 변수 고정(혹시 사용 중이면)
-  var sec1 = document.querySelector('.sec-1');
-  if (sec1) sec1.style.setProperty('--bgY', '50%');
-
-  // 3) 섹션2 배경 이동 변수 고정(있어도 0으로)
-  var sec2Img = document.querySelector('.sec-2 .sec2-bg img');
-  if (sec2Img) sec2Img.style.setProperty('--imgY', '0px');
-
-  // 4) 모바일에서는 스크롤 기반 애니메이션/토글 실행하지 않음
-  return;
-}
 
     /* =========================================================
        Section 1~2: 첫 진입 애니메이션/등장
@@ -2576,6 +2530,7 @@ $(document).on('click', '#skillModal .win-icons .i-close', function(e){
 </main>
 </body>
 </html>
+
 
 
 
