@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css" rel="stylesheet">
+    <style>
+            /* =========================
+            RESET / BASE
+            ========================= */
+            a{color:inherit;text-decoration:none;}
+            ul,ol{list-style:none;margin:0;padding:0;}
+            img{display:block;max-width:100%;}
+            body{
+            margin:0;
+            font-family:'SUIT',sans-serif;
+            color:#2b2b2b;
+            background:#fff;
+            }
+            .container{width:1200px;margin:0 auto;}
+
+            /* =========================
+            COMMON TITLE (22px)
+            ========================= */
+            .sec_title,
+            .page_title{
+            font-size:28px;
+            font-weight:800;
+            color:#1a1a1a;
+            line-height:1.2;
+            }
+
+            /* =========================
+            HEADER (메인과 동일)
+            ========================= */
+            #header{
+            height:64px;
+            border-bottom:1px solid #eee;
+            background:#fff;
+            }
+            .hd_inner{
+            height:64px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            }
+            .hd_logo a{display:flex;align-items:center;}
+        .hd_util{
+          display:flex;
+          align-items:center;
+          gap:16px;
+          font-size:12px;
+          color:#555;
+        }
+            .hd_menu img{height:20px;}
+
+            /* =========================
+              SUB PAGE LAYOUT
+          ========================= */
+              #sub{padding:40px 0 80px;}
+
+              .schedule_table_wrap{
+                width:100%;
+              }
+
+              /* ✅ (선택) 바깥 테두리는 table 말고 wrap으로 두면 겹침이 더 줄어듦 */
+              .schedule_table_wrap{
+                border:1px solid #666;
+              }
+
+              .schedule_table{
+                width:100%;
+                border-collapse:collapse;
+                table-layout:fixed;
+
+                border:0;                 /* ✅ 기존 border:1px solid #666; 제거 (wrap이 대신) */
+              }
+
+              /* 공통 셀 */
+              .schedule_table th,
+              .schedule_table td{
+                border:1px solid #666;
+                padding:0;
+                vertical-align:middle;
+                background:#fff;
+              }
+
+              /* 헤더(월) */
+              .schedule_table thead th{
+                height:54px;
+                font-size:12px;
+                font-weight:700;
+                color:#111;
+              }
+              .schedule_table thead th .en{
+                display:block;
+                font-style:italic;
+                font-weight:800;
+                line-height:1.1;
+              }
+              .schedule_table thead th .kr{
+                display:block;
+                font-size:11px;
+                font-weight:700;
+                line-height:1.1;
+              }
+
+              /* 좌상단 빗살 */
+              .schedule_table .corner{
+                width:210px;
+                background:repeating-linear-gradient(
+                  135deg,
+                  #f2f2f2 0,
+                  #f2f2f2 7px,
+                  #e3e3e3 7px,
+                  #e3e3e3 14px
+                );
+              }
+
+              /* 좌측 전시실 라벨 */
+              .schedule_table .room{
+                width:210px;
+                text-align:center;
+                font-size:13px;
+                font-weight:600;
+                color:#222;
+                line-height:1.35;
+                padding:12px 8px;
+
+                border-right:1px solid #666; /* ✅ 경계선은 room 쪽에서만 “하나”로 */
+              }
+
+              /* ✅ 오른쪽 셀은 왼쪽 보더를 끄면(겹침 방지) 더 안정적 */
+              .schedule_table .timeline_cell{
+                height:92px;
+                border-left:0;            /* ✅ room과 만나는 선이 두껍게 보이는 것 방지 */
+              }
+
+              /* 월 그리드 + 트랙 */
+              .timeline{
+                height:100%;
+                display:grid;
+                grid-template-columns:repeat(12, 1fr);
+                position:relative;
+
+                background: repeating-linear-gradient(
+                  to right,
+                  transparent 0,
+                  transparent calc((100% / 12) - 1px),
+                  #666 calc((100% / 12) - 1px),
+                  #666 calc(100% / 12)
+                );
+
+                padding:10px 0px;
+                box-sizing:border-box;
+                row-gap:8px;
+              }
+
+              .timeline.tracks-1{ grid-template-rows:repeat(1, 1fr); }
+              .timeline.tracks-2{ grid-template-rows:repeat(2, 1fr); }
+              .timeline.tracks-3{ grid-template-rows:repeat(3, 1fr); }
+              .timeline.tracks-4{ grid-template-rows:repeat(4, 1fr); }
+
+              /* 검정 바 */
+              .bar{
+                display:flex;
+                align-items:center;
+                height:22px;
+                margin: 0;
+                box-sizing:border-box;
+
+                background:#222;
+                color:#fff;
+                font-size:12px;
+                font-weight:600;
+
+                white-space:nowrap;
+                overflow:hidden;
+                text-overflow:ellipsis;
+              }
+
+              /* 아주 짧은 바 */
+              .bar.small{
+                padding:0 6px;
+                font-size:11px;
+              }
+
+            /* =========================
+            BREADCRUMB
+            ========================= */
+            .breadcrumb{
+            margin-bottom:40px;
+            font-size:13px;
+            color:#666;
+            }
+            .breadcrumb ol{
+            display:flex;
+            gap:8px;
+            }
+            .breadcrumb li::after{
+            content:">";
+            margin-left:8px;
+            color:#aaa;
+            }
+            .breadcrumb li:last-child::after{display:none;}
+
+            /* =========================
+            PAGE HEAD
+            ========================= */
+            .page_head{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            margin-bottom:30px;
+            }
+            .page_filter .branch_btn{
+            height:36px;
+            padding:0 14px;
+            border:1px solid #ccc;
+            border-radius:18px;
+            background:#fff;
+            font-size:13px;
+            cursor:pointer;
+            }
+
+            /* =========================
+            SCHEDULE
+            ========================= */
+            .schedule{
+            margin-bottom:70px;
+            }
+            .schedule_table_wrap{
+                border:1px solid #777;  /* 지금 이미지 같은 진한 선 */
+              }
+            .schedule_table{
+            border:0px;border-collapse:collapse;
+            }
+            .schedule_table img{
+            width:60%;
+            }
+            .schedule_info{
+            display:flex;
+            justify-content:space-between;
+            background:#f3f3f3;
+            padding:12px 18px;
+            font-size:13px;
+            color:#444;
+            margin-top:10px;
+            }
+            .schedule_table td{
+              border:0;
+              border-right:1px solid #777;
+              border-bottom:1px solid #777;
+            }
+
+            /* ✅ 맨 왼쪽 라인 */
+            .schedule_table tr > *:first-child{
+              border-left:1px solid #777;
+            }
+
+            /* ✅ 맨 위 라인(헤더) */
+            .schedule_table thead tr:first-child > *{
+              border-top:1px solid #777;
+            }
+            /* =========================
+            DOCENT
+            ========================= */
+            .docent{
+            margin-bottom:80px;
+            }
+            .docent_inner{
+            display:flex;
+            gap:48px;
+            align-items:flex-start;
+            }
+            .docent_img{
+            width:45%;
+            }
+            .docent_txt{
+            width:55%;
+            }
+            .docent_list{
+            margin:20px 0 24px;
+            font-size:16px;
+            line-height:1.7;
+            color:#444;
+            }
+            .docent_list li{margin-bottom:8px;}
+            .btn_line{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            height:34px;
+            padding:0 24px;
+            border:1px solid #999;
+            border-radius:20px;
+            font-size:14px;
+            }
+
+            /* =========================
+            ONGOING EXHIBITION
+            ========================= */
+            .ongoing{
+            margin-bottom:100px;
+            text-align: center;
+            }
+            .ongoing_list{
+            margin-top:40px;
+            }
+            .ongoing_list li{
+            margin-bottom:30px;
+            font-size:15px;
+            }
+            .ongoing_list a{
+            text-decoration:underline;
+            }
+
+/* =========================
+          FOOTER
+        ========================= */
+        #footer{
+          background:#e9e1d3;
+          padding:34px 0 40px;
+        }
+        .ft_inner{
+          display:flex;
+          align-items:flex-start;   /* ✅ 상단 기준 정렬 */
+          justify-content:space-between;
+          gap:40px;
+        }
+        /* 좌측 */
+        .ft_left{width:360px;}
+        .ft_logo{margin:0 0 14px;}
+        .ft_logo img{height:44px; width:auto;}
+        .ft_addr{
+          margin:0 0 6px;
+          font-size:13px;
+          color:#333;
+          line-height:1.5;
+        }
+        .ft_copy{
+          margin:0;
+          font-size:13px;
+          color:#333;
+        }
+        .ft_addr,.ft_copy{
+            display:inline;       
+            white-space:nowrap;   /* 줄바꿈 방지 */
+          }
+        /* 중앙 링크 */
+              .ft_links{
+                flex:none;              
+                display:flex;
+                gap:18px;
+                align-items:center;
+
+                margin-left:0px;      
+                margin-top:25px;
+              }
+          .ft_links a{
+            font-size:13px;
+            color:#333;
+            white-space:nowrap;        /* 줄바꿈 방지 */
+          }
+          .ft_links a.is_point{
+            color:#d33;
+            font-weight:700;
+          }
+        /* 우측 셀렉트 */
+        .ft_right{
+          width:210px;
+          display:flex;
+          flex-direction:column;
+          gap:12px;
+          align-items:flex-end;
+        }
+        .ft_select{
+          width:200px;
+          height:34px;
+          border:0;
+          border-radius:8px;
+          background:#cfcfcf;
+          padding:0 12px;
+          font-size:13px;
+          color:#333;
+          outline:none;
+        }
+
+</style>
+
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container hd_inner">
+      <h1 class="hd_logo">
+        <a href="../메인페이지/main.html">
+          <img src="images/광주 시립 미술관 Gwangju Musium of Art_메인로고.jpg" alt="메인로고">
+        </a>
+      </h1>
+
+      <nav class="hd_util">
+        <a href="#">검색</a>
+        <a href="#">로그인/회원가입</a>
+        <a href="../상세 네비게이션/navi_page.html" class="hd_menu" aria-label="메뉴">
+          <img src="images/햄부거.png" alt="">
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Subpage: Content -->
+  <main id="sub">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <ol>
+          <li><a href="../메인페이지/main.html">홈</a></li>
+          <li><a href="../서브페이지/sub.html">관람/방문안내</a></li>
+          <li aria-current="page">관람시간</li>
+        </ol>
+      </nav>
+
+      <!-- Page Title + Branch Select -->
+      <div class="page_head">
+        <h2 class="page_title">관람시간</h2>
+
+        <div class="page_filter">
+          <button type="button" class="branch_btn" aria-haspopup="listbox" aria-expanded="false">
+            광주시립미술관 <span class="ic" aria-hidden="true">▼</span>
+          </button>
+          <!-- 필요하면 나중에 dropdown 넣기 -->
+        </div>
+      </div>
+
+      <!-- Schedule Table -->
+              <section class="schedule" aria-label="전시 일정표">
+                <div class="schedule_table_wrap">
+          <table class="schedule_table" aria-label="전시 일정표">
+            <thead>
+              <tr>
+                <th class="corner" scope="col"></th>
+                <th scope="col"><span class="en">Jan</span><span class="kr">1월</span></th>
+                <th scope="col"><span class="en">Feb</span><span class="kr">2월</span></th>
+                <th scope="col"><span class="en">Mar</span><span class="kr">3월</span></th>
+                <th scope="col"><span class="en">Apr</span><span class="kr">4월</span></th>
+                <th scope="col"><span class="en">May</span><span class="kr">5월</span></th>
+                <th scope="col"><span class="en">Jun</span><span class="kr">6월</span></th>
+                <th scope="col"><span class="en">Jul</span><span class="kr">7월</span></th>
+                <th scope="col"><span class="en">Aug</span><span class="kr">8월</span></th>
+                <th scope="col"><span class="en">Sep</span><span class="kr">9월</span></th>
+                <th scope="col"><span class="en">Oct</span><span class="kr">10월</span></th>
+                <th scope="col"><span class="en">Nov</span><span class="kr">11월</span></th>
+                <th scope="col"><span class="en">Dec</span><span class="kr">12월</span></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- 1행 -->
+              <tr>
+                <th class="room" scope="row">시립미술관 본관<br>제1,2전시실</th>
+                <td class="timeline_cell" colspan="12">
+                  <div class="timeline tracks-2">
+                    <!-- 바 길이: grid-column: 시작월 / (끝월+1) -->
+                    <a href="#" class="bar" style="grid-column:4 / 9; grid-row:1;">
+                      2025 광주시립미술관 민주인권평화전 《공명-기억과 …
+                    </a>
+                    <a href="#" class="bar" style="grid-column:7 / 13; grid-row:2;">
+                      2025 광주디자인비엔날레기념전 “장미 토끼 소금: 살아 …
+                    </a>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- 2행 -->
+              <tr>
+                <th class="room" scope="row">시립미술관 본관<br>제3,4전시실</th>
+                <td class="timeline_cell" colspan="12">
+                  <div class="timeline tracks-4">
+                    <a href="#" class="bar" style="grid-column:2 / 4; grid-row:1;">
+                      2024 광주청장애인문화예술지…
+                    </a>
+                    <a href="#" class="bar" style="grid-column:3 / 7; grid-row:2;">
+                      2023-2024 광주시립미술관 신소장품 (2025.03.18 ~ …
+                    </a>
+                    <a href="#" class="bar" style="grid-column:6 / 12; grid-row:3;">
+                      2025 현대미술기획전 《그리고, 하루》 (2025.07.29 ~ …
+                    </a>
+                    <a href="#" class="bar small" style="grid-column:12 / 13; grid-row:4;">
+                      2025 …
+                    </a>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- 3행 -->
+              <tr>
+                <th class="room" scope="row">시립미술관 본관<br>제5,6전시실</th>
+                <td class="timeline_cell" colspan="12">
+                  <div class="timeline tracks-3">
+                    <a href="#" class="bar" style="grid-column:2 / 5; grid-row:1;">
+                      2023 오지호미술상 수상작가전 《송필용: …
+                    </a>
+                    <a href="#" class="bar" style="grid-column:5 / 10; grid-row:2;">
+                      남도 한국화 명품전 《마음, 예술가의 혼을 담은 한국화…
+                    </a>
+                    <a href="#" class="bar" style="grid-column:9 / 12; grid-row:3;">
+                      2024 허백련미술상 수상작가…
+                    </a>
+                    <a href="#" class="bar" style="grid-column:11 / 13; grid-row:3;">
+                      2024 오지호미술…
+                    </a>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- 4행 -->
+              <tr>
+                <th class="room" scope="row">시립미술관 본관<br>기타 전시관</th>
+                <td class="timeline_cell" colspan="12">
+                  <div class="timeline tracks-1">
+                    <a href="#" class="bar" style="grid-column:2 / 5; grid-row:1;">
+                      2024민주인권평화전 《신학철…》
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Info Bar -->
+        <div class="schedule_info">
+          <p class="info_item">· 평일, 주말, 공휴일: 10:00 ~ 18:00</p>
+          <p class="info_item">· 휴관일: 1월 1일, 설(당일), 추석(당일), 매주 월요일</p>
+        </div>
+      </section>
+
+      <!-- Docent -->
+      <section class="docent">
+        <div class="docent_inner">
+          <div class="docent_img">
+            <img src="images/작품정규해설이미지.jpg" alt="전시해설">
+          </div>
+
+          <div class="docent_txt">
+            <h3 class="sec_title">전시해설</h3>
+
+            <ul class="docent_list">
+              <li>· 정규해설시간<br>— 화요일~일요일 11:00, 14:00</li>
+              <li>· 도슨트 프로그램은 현장 통제 및 일반 관람객 편의를 위해 단체 관람객의 인원이 제한될 수 있습니다.</li>
+              <li>· 정기 운영 외의 외부해설은 사전요청 후 승인을 받으셔야 합니다.</li>
+              <li>· 단체해설 및 예약은 반드시 전시해설 담당자를 통해 예약 후 방문해주시기 바랍니다.</li>
+              <li>· 현장 상황에 따라 전시해설이 불가할 수 있습니다.</li>
+              <li>· 해설문의: 062-613-7135</li>
+            </ul>
+
+            <a href="#" class="btn_line">+예약하기</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ongoing Exhibitions -->
+      <section class="ongoing">
+        <h3 class="sec_title">진행중인 전시</h3>
+
+        <ul class="ongoing_list">
+          <li><a href="#">[2025.07.29 ~ 2025.11.23] 2025 현대미술기획전 《그리고, 하루》</a></li>
+          <li><a href="#">[2025.08.29 ~ 2026.01.25] 2025 광주디자인비엔날레기념전 “장미 토끼 소금: 살아 있는 제의”</a></li>
+          <li><a href="#">[2025.11.21 ~ 2026.01.18] 2024 오지호미술상 수상작가전 《방정아: 묻다, 묻다》</a></li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container ft_inner">
+      <!-- LEFT -->
+      <div class="ft_left">
+        <h2 class="ft_logo">
+          <img src="images/푸터로고.png" alt="GMA 푸터로고">
+        </h2>
+
+        <p class="ft_addr">
+          61104 광주광역시 북구 하서로 52 (운암동) &nbsp;&nbsp; TEL: 062-613-7100
+        </p>
+        <p class="ft_copy">Copyright © Gwangju Museum of Art. All Rights Reserved.</p>
+      </div>
+
+      <!-- CENTER -->
+      <ul class="ft_links">
+        <li><a href="#">행정 서비스 현장</a></li>
+        <li><a class="is_point" href="#">개인정보 처리방침</a></li>
+        <li><a href="#">영상정보처리기기 운영 및 관리방침</a></li>
+        <li><a href="#">저작권 보호정책</a></li>
+        <li><a href="#">전자우편 수집거부</a></li>
+      </ul>
+
+      <!-- RIGHT -->
+      <div class="ft_right">
+        <select class="ft_select">
+          <option>문화기관 협의회</option>
+        </select>
+
+        <select class="ft_select">
+          <option>관련기관 바로가기</option>
+        </select>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

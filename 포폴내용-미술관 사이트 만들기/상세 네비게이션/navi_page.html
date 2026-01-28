@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>navigaton_page</title>
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css" rel="stylesheet">
+<style>
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  img { display: block; }
+
+  /* 크게 바꾸지 않고: 고정 1920/960 → 화면에 맞게 대응 + 배경 깨짐 방지 */
+  body, html{
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    color: #696969;
+    font-family: 'SUIT', sans-serif;
+    background: url(images/배경.jpg) no-repeat center center;
+    background-size: cover;
+    overflow-x: hidden;
+  }
+
+  /* 헤더: 기존 우측정렬 유지, margin으로 위치 잡는 것만 안정화 */
+  #header{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 360px; /* 기존 margin-right 역할 */
+    box-sizing: border-box;
+  }
+  #header > a{
+    display: block;
+    margin-top: 0;       /* align-items로 정렬되니 불필요 */
+  }
+
+  #main{
+    width: 100%;
+    height: calc(100vh - 100px); /* 860px 대신 화면 대응 */
+    display: flex;
+  }
+
+  /* 로고 영역: 기존 폭 유지하되, 정렬을 margin 대신 padding으로 */
+  #logo{
+    width: 748px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+  }
+  #logo > a{
+    display: block;
+    margin-top: 196px;   
+    margin-right: 165px; 
+  }
+
+  /* gnb 영역: flex-wrap 유지, 정렬 간격은 gap로 자연스럽게 */
+  #gnb{
+    width: 1172px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    /* 기존 margin-left 유지하되, box-sizing 적용 */
+    margin-left: 142px;
+    box-sizing: border-box;
+
+    /* 기존 li margin-right(298px) 대신 gap로 동일한 느낌 유지 */
+    gap: 0 298px;
+    align-content: flex-start; /* 위에서부터 채우기 */
+    padding-top: 100px;        /* 너무 위로 붙는 느낌 완화(원하면 제거 가능) */
+  }
+
+  /* li: 기존 사이즈 유지, margin-right 제거(대신 gap 사용) */
+  #gnb > li{
+    width: 200px;
+    height: 220px;
+    margin-right: 0;
+  }
+
+  #gnb > li > a{
+    width: 100%;
+    height: 20px;
+    display: block;
+    font-size: 28px;
+    color: #313131;
+    font-weight: 700;
+    margin-bottom: 27px;
+    line-height: 1.1;
+  }
+
+  .sub{
+    width: 100%;
+  }
+  .sub > li{
+    width: 100%;
+    margin-top: 8px; /* 5px → 조금 더 숨 쉬게 */
+  }
+  .sub > li > a{
+    display: block;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #696969;
+  }
+  .sub > li > a:hover{
+    color: #313131;
+  }
+
+  /* 화면이 작아질 때 깨짐 최소화(큰 변경 없이 “보정”만) */
+  @media (max-width: 1400px){
+    #header{ padding-right: 40px; }
+    #main{ flex-direction: column; }
+    #logo{ width: 100%; justify-content: center; }
+    #logo > a{ margin: 60px 0 0; }
+    #gnb{
+      width: 100%;
+      margin-left: 0;
+      padding: 60px 40px 0;
+      gap: 40px 120px;
+    }
+  }
+  /* 현재 페이지 강조 */
+    #gnb a.active,
+    .sub a.active{
+      font-weight:700;
+      color:#f77e7e;
+    }
+  
+    /* 서브 메뉴는 살짝 포인트 */
+    .sub a.active{
+      color: #fd7575;
+    }
+</style>
+</head>
+<body>
+    <!--헤더-->
+    <div id="header"><a href="../메인페이지/main.html"><img src="images/닫기 버튼.png" alt="닫기버튼"></a></div>
+    
+    <!--메인-->
+    <div id="main">
+    
+    <!--로고-->
+    <h1 id="logo"><a href="../메인페이지/main.html"><img src="images/로고.png" alt="미술관 로고"></a></h1>
+    
+    <!--네비게이션-->
+    <ul id="gnb">
+        <li>
+            <a href="#">전시</a>
+            <ul class="sub">
+                <li><a href="#">현재전시</a></li>
+                <li><a href="#">특별프로젝트/기획전</a></li>
+                <li><a href="#">예정전시</a></li>
+                <li><a href="#">지난전시</a></li>
+             </ul>
+        </li>
+        <li>
+            <a href="../서브페이지/sub.html" class="active">관람/방문안내</a>
+             <ul class="sub">
+                <li><a href="../서브페이지/sub.html" class="active">관람시간</a></li>
+                <li><a href="#">관람안내</a></li>
+                <li><a href="#">요금안내</a></li>
+                <li><a href="#">부대시설</a></li>
+                <li><a href="#">오시는길/지도</a></li>
+             </ul>            
+        </li>
+        <li>
+            <a href="#">소장품/기록</a>
+             <ul class="sub">
+                <li><a href="#">도록/출판물</a></li>
+                <li><a href="#">소장품</a></li>
+                <li><a href="#">전시기록</a></li>
+                <li><a href="#">영상문서 자료</a></li>
+             </ul>            
+        </li>
+        <li>
+            <a href="#">프로그램</a>
+             <ul class="sub">
+                <li><a href="#">교육 프로그램</a></li>
+                <li><a href="#">워크숍</a></li>
+                <li><a href="#">행사</a></li>
+                <li><a href="#">대관안내</a></li>
+             </ul>            
+        </li>
+        <li>
+            <a href="#">기관소개</a>
+             <ul class="sub">
+                <li><a href="#">미술관 미션/철학</a></li>
+                <li><a href="#">연혁</a></li>
+                <li><a href="#">연락처</a></li>
+                <li><a href="#">조직</a></li>
+                <li><a href="#">전시관 소개</a></li>
+             </ul>            
+        </li>                                
+    </ul>
+
+    </div>
+</body>
+</html>
