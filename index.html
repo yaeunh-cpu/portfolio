@@ -1136,6 +1136,275 @@
     display:none !important;
   }
 }
+/* =========================================================
+   Mobile Layout Rebuild (content only)
+   - 붙여넣기 위치: <style> 맨 아래
+========================================================= */
+@media (max-width: 980px){
+
+  /* ---------- 공통: 모바일 기본 ---------- */
+  html, body{ overflow-x:hidden; }
+  .container{
+    width:100%;
+    max-width:none;
+    margin:0 auto;
+    padding:0 16px;
+    box-sizing:border-box;
+  }
+  /* PC에서 nowrap 걸어둔 곳들 모바일에서 해제 */
+  .intro h1,
+  .sec-2 .desc,
+  .pf-logo-meta,
+  .mini-strong,
+  .pf-mini-info .mini-right{
+    white-space:normal !important;
+  }
+
+  /* ---------- Section 1 ---------- */
+  .sec-1{
+    height:auto;
+    min-height:100vh;
+    padding:72px 0 92px;
+    background:#1a1a1a; /* 배경 이미지 제거했으니 톤만 유지 */
+  }
+
+  .intro{
+    width:100%;
+    padding-top:0;
+    margin-left:0;
+  }
+  .intro .role{ font-size:15px; margin-bottom:14px; }
+  .intro h1{
+    font-size:24px;
+    line-height:1.55;
+    margin:14px 0 14px;
+  }
+  .intro .desc{
+    font-size:16px;
+    line-height:1.7;
+    margin-top:0;
+  }
+
+  /* 네비: absolute 해제 → 버튼형 */
+  .navi{
+    position:static;
+    left:auto; bottom:auto;
+    transform:none;
+    margin-top:22px;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+  }
+  .navi a{
+    font-size:15px;
+    padding:10px 14px;
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:999px;
+    display:inline-flex;
+    align-items:center;
+  }
+
+  /* 아래 화살표: 문서 흐름으로 */
+  .sec1-arrow{
+    position:static;
+    transform:none;
+    margin-top:26px;
+  }
+  .sec1-arrow p{ font-size:13px; }
+  .sec1-arrow img{ width:44px; height:auto; margin:8px auto 0; }
+
+  /* 모바일에서 black 텍스트가 어두워 보이면 흰색으로 */
+  .black{ color:#fff; }
+
+  /* ---------- Section 2 ---------- */
+  .sec-2{
+    padding:86px 0 110px;
+  }
+  .sec2-inner{
+    width:100%;
+    flex-direction:column;
+    gap:22px;
+    align-items:flex-start;
+  }
+  .sec2-left{
+    width:100%;
+    max-width:none;
+    font-size:16px;
+    line-height:1.75;
+  }
+  .sec2-left .work{ font-size:22px; margin-bottom:10px; }
+  .sec2-left .mint{ font-size:16px; margin-bottom:14px; }
+  .sec-2 .desc{
+    font-size:16px;
+    line-height:1.75;
+    margin-top:10px;
+  }
+
+  /* 프로필 영역: 텍스트 아래로 자연스럽게 */
+  .sec2-right{
+    width:100%;
+    margin-top:8px;
+    align-items:flex-start;
+  }
+  .sec2-right .avatar{
+    width:220px;
+    height:220px;
+  }
+  .sec2-right .avatar img{
+    object-fit:cover;
+    object-position:center 20%; /* 얼굴 잘림 완화 */
+  }
+  .sec2-right .tag{ font-size:16px; margin-top:10px; }
+
+  /* 2페이지 화살표도 흐름으로 */
+  .sec2-arrow{
+    position:static;
+    transform:none;
+    margin-top:26px;
+  }
+  .sec2-arrow > p{ font-size:13px; margin-bottom:6px; }
+  .sec2-arrow img{ width:44px; height:auto; margin:8px auto 0; }
+
+  /* ---------- Section 3 (SKILL) ---------- */
+  .skill-folder img{ width:92px; }
+  .skill-label{ font-size:16px; }
+
+  /* ---------- Section 4: 전체 간격 정리 ---------- */
+  .sec-4{
+    padding:90px 0 120px;
+  }
+  .sec4-head{
+    margin-top:0;
+    margin-bottom:60px;
+  }
+  .sec4-kicker{
+    font-size:16px;
+    line-height:1.6;
+  }
+  .pf + .pf{ margin-top:70px; }
+  .pf-titleline{ margin-bottom:22px; }
+  .pf-title{
+    font-size:18px;
+    margin-bottom:0;
+  }
+
+  /* 로고타입: 좌우 → 세로 */
+  .pf-logo{ min-height:auto; }
+  .pf-logo-wrap{ margin:24px 0 50px; }
+  .pf-logo-slide.is-active{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+    padding-right:0;
+  }
+  .pf-logo-slide img{
+    width:100%;
+    max-width:360px;
+  }
+  .pf-logo-cap{
+    width:100%;
+    padding-right:0;
+  }
+  .pf-logo-meta{
+    font-size:15px;
+    line-height:1.7;
+  }
+  .pf-logo-meta li{ margin:0 0 12px; }
+  .pf-logo-meta li span{ font-size:14px; margin-bottom:6px; }
+
+  /* 로고 다음 버튼: 화면 안으로 */
+  .pf-logo-wrap .pf-arrow{
+    position:static;
+    transform:none;
+    margin-top:12px;
+    width:44px; height:44px;
+  }
+
+  /* 배너: 텍스트 줄간격 */
+  .pf-banner .pf-titleline p{
+    font-size:15px;
+    line-height:1.6;
+  }
+  .pf-banner-wrap{
+    margin:20px auto 50px;
+  }
+
+  /* 웹 광고페이지: 좌우 → 세로 */
+  .pf-web-row{
+    flex-direction:column;
+    gap:22px;
+    padding-top:0;
+  }
+  .pf-web-left, .pf-web-right{ width:100%; }
+  .pf-web .pf-web-left .pf-titleline p{
+    margin-top:10px;
+    font-size:15px;
+    line-height:1.6;
+  }
+
+  /* 모니터 목업: 스케일/마이너스 마진 제거 */
+  .device-monitor{
+    transform:none;
+    transform-origin:center;
+    margin:0;
+  }
+
+  /* 홈 카드 */
+  .home-card-title{ font-size:16px; }
+  .home-cta{ font-size:20px; }
+
+  /* 홈 카드 설명: 세로 */
+  .pf-mini-info{
+    margin:14px auto 0;
+    flex-direction:column;
+    gap:10px;
+  }
+  .pf-mini-info .mini-left{
+    width:100%;
+    margin-left:0;
+  }
+  .mini-strong{
+    font-size:18px;
+    line-height:1.4;
+  }
+  .mini-sub{ font-size:16px; }
+  .pf-mini-info .mini-right{
+    width:100%;
+    padding-left:18px;
+    list-style:disc;
+  }
+  .pf-mini-info .mini-right li{
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:8px;
+  }
+
+  /* 모바일 리디자인 섹션 */
+  .pf-mobile{ margin-top:60px; }
+  .pf-mobile-row{
+    flex-direction:column;
+    gap:18px;
+  }
+  .device-phone{
+    width:100%;
+    max-width:360px;
+  }
+  .pf-bullets{
+    padding-top:0;
+  }
+  .pf-bullets li{
+    font-size:15px;
+    line-height:1.7;
+  }
+
+  /* ---------- Section 5 ---------- */
+  .sec-5{ padding:110px 0 140px; }
+  .sec5-title{ font-size:22px; margin-bottom:20px; }
+  .sec5-desc{ font-size:16px; line-height:1.75; }
+  .sec5-contact{ margin-top:70px; gap:14px; }
+  .contact-item{ font-size:15px; }
+}
 
   </style>
 
@@ -1772,6 +2041,7 @@ $(document).on('click', '#skillModal .win-icons .i-close', function(e){
 </main>
 </body>
 </html>
+
 
 
 
