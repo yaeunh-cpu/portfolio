@@ -8,1861 +8,275 @@
   <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css" rel="stylesheet" />
 
   <style>
-  /* =========================================================
-     Base
-  ========================================================= */
-  a{color:inherit;}
-  html,body{color:#fff;}
-  .container{width:1200px;margin:0 auto;}
+ /* =========================================================
+   Base
+========================================================= */
+a{color:inherit;}
+html,body{color:#fff;}
+.container{width:1200px;margin:0 auto;}
+.black{color:#333;}
 
-  .sec-1{position:relative;z-index:1;}
-  .sec-2{position:relative;z-index:2;}
-  .sec-3{position:relative;z-index:3;}
+.sec-1,.sec-2,.sec-3,.sec-4,.sec-5{position:relative;}
 
-  /* =========================================================
-     Section 1
-  ========================================================= */
-  .sec-1{
-    height:100vh;
-    overflow:visible;
-    --bgY:50%;
-  }
-  .sec-1::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(90deg,#1a1a1a 0 50%,#fff 50% 100%);
-    z-index:0;
-  }
-  .sec-1::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    left:-50px;
-    background:url('images/main_logo.png') no-repeat 0 var(--bgY);
-    background-size:70%;
-    z-index:1;
-    pointer-events:none;
-  }
-  .sec-1>.container{position:relative;z-index:2;}
-
-  .intro{
-    width:50%;
-    padding-top:60px;
-    margin-left:22px;
-    text-align:left;
-  }
-  .intro .role,
-  .intro h1,
-  .intro .desc{
-    max-width:410px;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  .intro .role{
-    font-size:20px;
-    letter-spacing:0.08em;
-    margin-bottom:26px;
-    opacity:0.9;
-  }
-  .role{font-weight:200;font-size:20px !important;}
-  .intro h1{
-    font-size:35px;
-    line-height:1.8;
-    font-weight:700;
-    margin-top:50px;
-    margin-bottom:60px;
-    white-space:nowrap;
-  }
-  .intro .desc{
-    font-size:20px;
-    line-height:1.6;
-    opacity:0.9;
-    margin-top:-10px;
-  }
-  .black{color:#333;}
-
-  /* Navi */
-  .navi{
-    position:absolute;
-    left:50%;
-    bottom:-550px;
-    transform:translateX(-50%);
-    display:flex;
-    gap:150px;
-    width:auto;
-    z-index:99999;
-    pointer-events:auto;
-  }
-  .navi>a{font-size:20px;}
-  .navi>.view:hover{display:block;font-weight:700;border-bottom:1px solid #fff;}
-  .navi>a>span:hover{display:block;font-weight:700;border-bottom:1px solid #333;}
-
-  /* 1화면 아래 화살표 */
-  .sec1-arrow{
-    position:absolute;
-    left:50%;
-    bottom:20px;
-    transform:translateX(-50%);
-    z-index:10000;
-    text-align:center;
-    pointer-events:auto;
-  }
-  .sec1-arrow p{
-    margin-bottom:0px;
-    font-size:20px;
-    letter-spacing:0.12em;
-    color:#D6D6D6;
-    font-weight:700;
-  }
-  .sec1-arrow img{display:block;transition:transform 250ms ease;}
-  .sec1-arrow:hover img{transform:scale(1.12);}
-
-  /* =========================================================
-     Section 2
-  ========================================================= */
-  .sec-2{
-    width:100%;
-    height:auto;
-    min-height:70vh;
-    padding:140px 0 140px;
-    background:#1a1a1a;
-    position:relative;
-    overflow:hidden;
-
-  }
-
-
-  /* 2배경 레이어/이미지 */
-  .sec-2 .sec2-bg{
-    position:absolute;
-    inset:0;
-    z-index:9999;
-    pointer-events:none;
-  }
-  .sec-2 .sec2-bg img{
-    position:absolute;
-    top:var(--imgY, -200px);
-    right:-6.5px;
-    display:block;
-    will-change:top;
-  }
-
-  /* 2페이지 콘텐츠 */
-  .sec2-inner{
-    position:relative;
-    width:1200px;
-    margin:0 auto;
-    z-index:10000;
-    display:flex;
-    justify-content:space-between;
-    gap:0px;
-  }
-
-  /* 좌측 텍스트 */
-  .sec2-left{
-    width:55%;
-    max-width:560px;
-    font-size:20px;
-    line-height:2.0;
-    opacity:0.9;
-  }
-  .sec2-left .work{
-    font-size:30px;
-    font-weight:700;
-    margin-bottom:18px;
-  }
-  .sec2-left .mint{
-    font-size:20px;
-    font-weight:700;
-    color:#66e6d6;
-    margin-bottom:55px;
-  }
-  .sec-2 .desc{
-    font-size:20px;
-    line-height:4.0;
-    margin-top:100px;
-    opacity:0.9;
-    white-space:nowrap;
-  }
-
-  /* 우측 프로필 */
-  .sec2-right{
-    width:50%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    margin-top:-200px;
-  }
-  .sec2-right .avatar{
-    width:450px;
-    height:450px;
-    border-radius:50%;
-    overflow:hidden;
-    background:#fff;
-  }
-  .sec2-right .avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-  }
-  .sec2-right .tag{
-    margin-top:18px;
-    font-size:22px;
-    letter-spacing:0.08em;
-    color:#66e6d6;
-  }
-
-  /* 2페이지 화살표 */
-  .sec2-arrow{
-    position:absolute;
-    left:50%;
-    bottom:100px;
-    transform:translateX(-50%);
-    z-index:10001;
-    text-align:center;
-  }
-  .sec2-arrow > p{margin-bottom:10px;}
-  .sec2-arrow img{display:block;transition:transform 250ms ease;}
-  .sec2-arrow:hover img{transform:scale(1.12);}
-
-  /* 2페이지 진입 애니메이션 */
-  .sec2-left,
-  .sec2-right{
-    opacity:0;
-    will-change:transform, opacity;
-  }
-  .sec2-left{transform:translateX(-80px);}
-  .sec2-right{transform:translateX(80px);}
-  .sec-2.active .sec2-left,
-  .sec-2.active .sec2-right{
-    opacity:1;
-    transform:translateX(0);
-    transition:transform 2000ms ease, opacity 2000ms ease;
-  }
-
-  /* =========================================================
-     Section 3 : SKILL (폴더 -> 창 오픈)
-  ========================================================= */
-  .sec-3{
-    position:relative;
-    width:100%;
-    min-height:100vh;
-    background:#1a1a1a;
-    overflow:visible;
-  }
-
-  /* 클릭 전 : 폴더 런처 */
-  .skill-launch{
-    position:relative;
-    width:100%;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .skill-folder{
-    border:0;
-    background:transparent;
-    cursor:pointer;
-    text-align:center;
-    color:#fff;
-    padding:0;
-  }
-  .skill-folder img{
-    display:block;
-    width:120px;
-    height:auto;
-    margin:0 auto;
-    transform:translateZ(0);
-    transition:transform 250ms ease, filter 250ms ease;
-  }
-  .skill-folder:hover img{transform:scale(1.06);filter:brightness(1.06);}
-  .skill-label{
-    display:block;
-    margin-top:10px;
-    font-size:20px;
-    letter-spacing:0.12em;
-    font-weight:700;
-  }
-
-  /* 모달(오버레이) */
-  .skill-modal{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-    pointer-events:none;
-  }
-  .skill-dim{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.55);
-    opacity:0;
-    transition:opacity 380ms ease;
-  }
-  .skill-windows{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:40px 20px;
-  }
-
-  /* 큰 프레임(회색바 + X) */
-  .skill-frame{
-    width:min(1200px, 96vw);
-    height:min(680px, 86vh);
-    border:2px solid rgba(255,255,255,0.55);
-    background:rgba(24,24,24,0.95);
-    box-shadow:0 22px 70px rgba(0,0,0,0.55);
-    position:relative;
-
-    opacity:0;
-    transform:translateY(18px) scale(0.98);
-    transition:transform 520ms cubic-bezier(.2,.9,.2,1),
-               opacity 420ms ease;
-  }
-  .skill-frame-bar{
-    height:58px;
-    background:#8f8f8f;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 18px;
-    box-sizing:border-box;
-  }
-  .skill-frame-title{
-    font-size:26px;
-    letter-spacing:0.08em;
-    color:#d7ff00;
-  }
-  .skill-close{
-    width:46px;
-    height:46px;
-    border:0;
-    background:transparent;
-    color:#fff;
-    font-size:34px;
-    line-height:1;
-    cursor:pointer;
-  }
-  .skill-frame-body{
-    position:relative;
-    width:100%;
-    height:calc(100% - 58px);
-    padding:30px 26px;
-    box-sizing:border-box;
-  }
-
-  /* 내부 창(win) 공통 */
-  .win{
-    position:absolute;
-    border:1px solid rgba(255,255,255,0.55);
-    background:#1a1a1af2;
-    backdrop-filter:blur(1px);
-    box-shadow:0 18px 40px rgba(0,0,0,0.35);
-
-    opacity:0;
-    transform:translateY(10px) scale(0.995);
-    transition:transform 560ms cubic-bezier(.2,.9,.2,1),
-               opacity 420ms ease;
-  }
-  .win-bar{
-    height:46px;
-    border-bottom:1px solid rgba(255,255,255,0.35);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 14px;
-    box-sizing:border-box;
-  }
-  .win-title{
-    font-size:26px;
-    font-weight:800;
-    letter-spacing:0.02em;
-    color:#fff;
-  }
-
-  /* 아이콘(ㅡ □ X) */
-  .win-icons{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    transform:translateY(2px);
-  }
-  .win-icons span{
-    position:relative;
-    width:14px;
-    height:14px;
-    display:inline-block;
-    border:none;
-    box-sizing:border-box;
-  }
-  .win-icons .i-min::before{
-    content:'';
-    position:absolute;
-    left:0;
-    right:0;
-    top:50%;
-    height:2px;
-    background:#ff7a00;
-    transform:translateY(-50%);
-  }
-  .win-icons .i-mid{border:2px solid #ff7a00;}
-  .win-icons .i-close::before,
-  .win-icons .i-close::after{
-    content:'';
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:16px;
-    height:2px;
-    background:#ff7a00;
-  }
-  .win-icons .i-close::before{transform:translate(-50%,-50%) rotate(45deg);}
-  .win-icons .i-close::after{transform:translate(-50%,-50%) rotate(-45deg);}
-
-  /* 텍스트 공통 */
-  .win-body{
-    position:relative;
-    padding:34px 34px 28px;
-    box-sizing:border-box;
-    color:#fff;
-  }
-  .win-list{
-    margin:0;
-    padding-left:24px;
-  }
-  .win-list li{
-    margin:12px 0;
-    line-height:1.65;
-    opacity:0.92;
-  }
-  .win-point{
-    position:absolute;
-    left:52%;
-    top:58%;
-    transform:translate(-50%, -50%);
-    margin:0;
-    width:42%;
-    text-align:left;
-    font-size:21px;
-    line-height:1.8;
-    color:#66e6d6;
-    font-weight:800;
-    white-space:nowrap;
-  }
-
-  /* 창 배치/겹침 */
-  .win-design{
-    left:60px;
-    top:30px;
-    width:calc(100% - 220px);
-    height:340px;
-    z-index:4;
-  }
-  .win-pub{
-    left:260px;
-    top:410px;
-    width:calc(100% - 320px);
-    height:190px;
-    z-index:5;
-  }
-  .win-work{
-    left:60px;
-    top:560px;
-    width:640px;
-    height:170px;
-    z-index:3;
-  }
-  .win-detailbox{
-    right:10px;
-    top:220px;
-    width:960px;
-    height:330px;
-    z-index:2;
-  }
-
-  /* Work Style 중앙 느낌 */
-  .win-work .win-body{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:30px 40px;
-  }
-  .win-work .win-title{margin-bottom:0px;}
-  .win-work .win-point{
-    position:static;
-    transform:none;
-    width:auto;
-    margin:0;
-    white-space:normal;
-    font-size:21px;
-    line-height:1.8;
-  }
-
-  /* Detail 박스 */
-  .win-detailbox .win-body{
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:0;
-  }
-  .detail-link{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:170px;
-    height:160px;
-    color:#31ff2a;
-    font-size:34px;
-    font-weight:900;
-    text-decoration:none;
-    padding-left:800px !important;
-    transform:translateX(6px);
-    margin-bottom:30px;
-  }
-
-  /* Design 텍스트 */
-  .win-design .win-list{margin-top:10px;padding-left:50px;}
-  .win-design .win-list li{font-size:20px;margin:12px 0;line-height:1.65;}
-  .win-design .win-point{left:70%;top:58%;width:42%;font-size:21px;white-space:nowrap;}
-
-  /* Publishing 텍스트 */
-  .win-pub .win-list{margin-top:-25px;padding-left:24px;}
-  .win-pub .win-list li{font-size:20px;margin:10px 0;line-height:1.6;}
-  .win-pub .win-point{left:70%;top:35%;width:38%;font-size:20px;white-space:nowrap;}
-
-  /* 활성화(열림) */
-  .skill-modal.active{pointer-events:auto;}
-  .skill-modal.active .skill-dim{opacity:1;}
-  .skill-modal.active .skill-frame{opacity:1;transform:translateY(0) scale(1);}
-  .skill-modal.active .win{opacity:1;transform:translateY(0) scale(1);}
-  .skill-modal.active .win-design{transition-delay:120ms;}
-  .skill-modal.active .win-detailbox{transition-delay:180ms;}
-  .skill-modal.active .win-pub{transition-delay:220ms;}
-  .skill-modal.active .win-work{transition-delay:320ms;}
-
-  /* Section 3 반응형 */
-  @media (max-width: 980px){
-    .skill-frame-body{padding:18px 16px;}
-
-    .win-design,
-    .win-pub,
-    .win-work,
-    .win-detailbox{
-      left:18px;
-      right:auto;
-      width:calc(100% - 36px);
-    }
-
-    .win-design{top:20px;height:auto;}
-    .win-pub{top:auto;margin-top:18px;position:relative;}
-    .win-work{top:auto;margin-top:18px;position:relative;}
-    .win-detailbox{top:auto;margin-top:18px;position:relative;height:220px;}
-
-    .win-body{padding:22px;}
-
-    .win-point{
-      position:static;
-      transform:none;
-      width:auto;
-      margin-top:18px;
-      text-align:left;
-      white-space:normal;
-      font-size:20px;
-    }
-
-    .detail-link{
-      width:auto;
-      height:auto;
-      padding:12px 18px;
-      font-size:20px;
-      padding-left:0 !important;
-      transform:none;
-      margin-bottom:0;
-    }
-  }
-
-  /* =========================================================
-     Section 4 (Portfolio board)
-     - 가시성 개선 + 중복 제거(모양 유지)
-  ========================================================= */
-
-  :root{
-    --sec4-pad-top: 110px;
-    --sec4-pad-btm: 140px;
-
-    --sec4-gap-1: 90px;
-    --sec4-gap-2: 110px;
-    --sec4-gap-3: 120px;
-    --sec4-gap-4: 120px;
-
-    --pf-title-size: 20px;
-    --pf-title-track: 0.04em;
-    --pf-title-color: rgba(255,255,255,0.88);
-
-    --kicker-size: 20px;
-    --kicker-color: rgba(255,255,255,0.75);
-
-    --arrow-size: 46px;
-    --arrow-right: 72px;
-    --arrow-top: 100px;
-
-    --banner-dot: 8px;
-    --banner-dot-gap: 10px;
-
-    --device-shadow: 0 18px 40px rgba(0,0,0,0.55);
-    --glass-bg: rgba(0,0,0,0.25);
-    --line: rgba(255,255,255,0.14);
-  }
-
-  .sec-4{
-    position:relative;
-    background:#1a1a1a;
-    padding:var(--sec4-pad-top) 0 var(--sec4-pad-btm);
-  }
-  .sec4-inner{position:relative;}
-
-  .sec4-head{
-    text-align:left;
-    margin-top:-100px;
-    margin-bottom:300px;
-  }
-  .sec4-kicker{
-    font-size:var(--kicker-size);
-    color:var(--kicker-color);
-    letter-spacing:0.02em;
-  }
-
-  .pf{position:relative;}
-  .pf + .pf{margin-top:var(--sec4-gap-2);}
-
-  .pf-titleline{margin-bottom:200px;}
-  .pf-title{
-    font-size:var(--pf-title-size);
-    letter-spacing:var(--pf-title-track);
-    color:var(--pf-title-color);
-    font-weight:700;
-    margin-bottom:-150px;
-  }
-  .pf-web .pf-titleline p{line-height:1.7;}
-
-  .pf-media{margin:0;}
-  .pf-media img{display:block;width:100%;height:auto;}
-
-  /* -------------------------
-     1) 로고타입
-     - (모양은 유지) 텍스트 간격/화살표 가시성만 보강
-  ------------------------- */
-  .pf-logo{
-  min-height: 800px; /* 로고 최대 크기 기준으로 */
+/* =========================================================
+   Section 1
+========================================================= */
+.sec-1{
+  height:100vh;
+  background:#1a1a1a;
+  overflow:hidden;
+}
+.sec-1::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,#1a1a1a 0 50%,#fff 50% 100%);
+}
+.sec-1::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  left:-50px;
+  background:url('images/main_logo.png') no-repeat 0 50%;
+  background-size:70%;
+  pointer-events:none;
 }
 
-  .pf-logo-wrap{
-    position:relative;
-    margin:300px 0;
-  }
-  .pf-logo-track{
-    position:relative;
-    max-width:980px;
-    margin:0 auto;
-  }
+.intro{
+  width:50%;
+  padding-top:60px;
+}
+.intro .role{
+  font-size:20px;
+  letter-spacing:0.08em;
+  margin-bottom:26px;
+}
+.intro h1{
+  font-size:35px;
+  line-height:1.8;
+  margin:50px 0 60px;
+  white-space:nowrap;
+}
+.intro .desc{
+  font-size:20px;
+  line-height:1.6;
+}
 
-  .pf-logo-slide{display:none;}
-  .pf-logo-slide.is-active{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:190px;
-    max-width:980px;
-    margin:0 auto;
-    position:relative;
-    padding-right:120px;
-  }
+.navi{
+  margin-top:80px;
+  display:flex;
+  gap:150px;
+}
 
-  .pf-logo-slide img{
-    width:520px;           /* 로고 크기 유지 */
-    max-width:100%;
-    height:auto;
-    display:block;
-    margin:0;
-  }
+/* =========================================================
+   Section 2
+========================================================= */
+.sec-2{
+  background:#1a1a1a;
+  padding:140px 0;
+}
+.sec2-inner{
+  display:flex;
+  justify-content:space-between;
+}
+.sec2-left{
+  width:55%;
+  font-size:20px;
+  line-height:2;
+}
+.sec2-left .work{
+  font-size:30px;
+  font-weight:700;
+  margin-bottom:18px;
+}
+.sec2-left .mint{
+  color:#66e6d6;
+  font-weight:700;
+  margin-bottom:55px;
+}
+.sec2-right{
+  width:45%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.avatar{
+  width:450px;
+  height:450px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#fff;
+}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+.tag{margin-top:18px;color:#66e6d6;font-size:22px;}
 
-  .pf-logo-cap{
-    margin-top:0;
-    width:320px;
-    padding-right:70px;    /* 텍스트 ↔ 화살표 간격 */
-    box-sizing:border-box;
-  }
+/* =========================================================
+   Section 3 : SKILL
+========================================================= */
+.sec-3{
+  min-height:100vh;
+  background:#1a1a1a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.skill-folder{
+  background:none;
+  border:0;
+  cursor:pointer;
+  text-align:center;
+}
+.skill-folder img{width:120px;}
+.skill-label{
+  margin-top:10px;
+  font-size:20px;
+  font-weight:700;
+}
 
-  .pf-logo-meta{
-    margin:0;
-    padding:0;
-    list-style:none;
-    line-height:1.8;       /* 가시성: 줄간격 */
-    color:rgba(255,255,255,0.78);
-    font-size:20px;
-    white-space:nowrap;
-  }
-  .pf-logo-meta li{display:block;margin:0 0 22px;}
-  .pf-logo-meta li span{
-    display:block;
-    font-weight:800;
-    letter-spacing:0.06em;
-    color:rgba(255,255,255,0.92);
-    font-size:20px;
-    margin-bottom:10px;    /* 라벨 ↔ 내용 간격 */
-  }
+/* modal */
+.skill-modal{position:fixed;inset:0;display:none;z-index:9999;}
+.skill-modal.active{display:block;}
+.skill-dim{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.6);
+}
+.skill-frame{
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:1200px;
+  background:#181818;
+  border:2px solid rgba(255,255,255,.5);
+}
+.skill-frame-bar{
+  height:58px;
+  background:#8f8f8f;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 18px;
+}
+.skill-frame-title{font-size:26px;color:#d7ff00;}
+.skill-close{
+  background:none;border:0;font-size:30px;color:#fff;cursor:pointer;
+}
+.skill-frame-body{
+  padding:30px;
+}
 
-  /* 화살표 버튼(텍스트 우측에 위치) */
-  .pf-logo-wrap .pf-arrow{
-    position:absolute;
-    width:var(--arrow-size);
-    height:var(--arrow-size);
-    left:1200px; /* 텍스트 우측으로 */
-    top:50%;
-    transform:translateY(-50%);
-    border:0;
-    background:transparent;
-    cursor:pointer;
-    z-index:10;
-    opacity:0.95;
-  }
-  /* ✅ 기존 코드에서 left:900% 때문에 삼각형이 화면 밖으로 나갈 수 있어,
-        "버튼 안에서" 보이도록만 보정(모양은 동일한 삼각형) */
-  .pf-logo-wrap .pf-arrow::before{
-    content:'';
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-35%,-50%);
-    width:0;height:0;
-    border-top:18px solid transparent;
-    border-bottom:18px solid transparent;
-    border-left:22px solid rgba(255,255,255,0.95);
-  }
-  .pf-logo-wrap .pf-arrow:hover{
-    opacity:1;
-    transform:translateY(-50%) translateX(4px);
-  }
+/* =========================================================
+   Section 4
+========================================================= */
+.sec-4{
+  background:#1a1a1a;
+  padding:120px 0 160px;
+}
+.sec4-kicker{
+  font-size:20px;
+  color:rgba(255,255,255,.75);
+  margin-bottom:120px;
+}
 
-  /* -------------------------
-     2) 배너타입
-  ------------------------- */
-  .pf-banner-wrap{
-    position:relative;
-    max-width:980px;
-    margin:150px auto 300px;
-  }
-  .pf-banner-track{position:relative;}
-  .pf-banner-visual{display:none;width:100%;}
-  .pf-banner-visual.is-active{display:block;}
-
-  .pf-banner .pf-title{margin-bottom:30px;}
-  .pf-banner .pf-titleline p + p{margin-top:9px;}
-
-  .pf-dots{
-    display:flex;
-    justify-content:center;
-    gap:var(--banner-dot-gap);
-    margin-top:10px;
-  }
-  .dot{
-    width:var(--banner-dot);
-    height:var(--banner-dot);
-    border-radius:999px;
-    border:0;
-    background:rgba(255,255,255,0.35);
-    cursor:pointer;
-  }
-  .dot.is-active{background:rgba(255,255,255,0.9);}
-
-  .pf-web{margin-top:var(--sec4-gap-2);}
-
-  /* -------------------------
-     3) 웹 광고페이지 제작
-  ------------------------- */
-  .pf-web-row{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:80px;
-    padding-top:100px;
-  }
-  .pf-web-left{width:44%;}
-  .pf-web-right{width:56%;}
-
-  .device{
-    position:relative;
-    width:100%;
-    filter:drop-shadow(var(--device-shadow));
-  }
-  .device-frame{width:100%;height:auto;display:block;}
-
-  .pf-web .pf-web-left .pf-titleline p{margin-top:190px;}
-
-  .device-monitor .device-screen{
-    position:absolute;
-    left:6%;
-    top:7.5%;
-    width:88%;
-    height:74%;
-    overflow:hidden;
-    border-radius:2px;
-    background:rgba(0,0,0,0.2);
-  }
-  .device-monitor{
-    transform:scale(1.19);
-    transform-origin:left top;
-    margin-left:-100px;
-    margin-top:-150px;
-  }
-  .device-content{
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:auto;
-    will-change:transform;
-    transform:translateY(0);
-  }
-
-  .pf-web-poster{width:100%;max-width:520px;margin-left:auto;}
-  .pf-web-poster img{display:block;width:100%;height:auto;filter:drop-shadow(var(--device-shadow));}
-
-  .pf-home{margin-top:var(--sec4-gap-3);}
-
-  /* -------------------------
-     4) 홈페이지 리디자인
-  ------------------------- */
-  .home-card{
-    display:block;
-    max-width:1200px;
-    margin:0 auto;
-    text-decoration:none;
-    color:#fff;
-  }
-
-  .home-card-bar{
-    height:44px;
-    background:rgba(255,255,255,0.14);
-    border:1px solid rgba(255,255,255,0.10);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 14px;
-    box-sizing:border-box;
-  }
-  .home-card-title{font-size:20px;font-weight:700;opacity:0.9;}
-  .home-card-win{display:flex;gap:10px;align-items:center;}
-  .home-card-win span{
-    position:relative;
-    width:12px;height:12px;
-    display:inline-block;
-    opacity:0.9;
-  }
-  .home-card-win .w-min::before{
-    content:'';
-    position:absolute;
-    left:0;right:0;top:50%;
-    height:2px;
-    background:rgba(255,255,255,0.9);
-    transform:translateY(-50%);
-  }
-  .home-card-win .w-mid{border:2px solid rgba(255,255,255,0.9);box-sizing:border-box;}
-  .home-card-win .w-close::before,
-  .home-card-win .w-close::after{
-    content:'';
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:14px;
-    height:2px;
-    background:rgba(255,255,255,0.9);
-  }
-  .home-card-win .w-close::before{transform:translate(-50%,-50%) rotate(45deg);}
-  .home-card-win .w-close::after{transform:translate(-50%,-50%) rotate(-45deg);}
-
-  .home-card-body{
-    position:relative;
-    border:1px solid rgba(255,255,255,0.10);
-    background:rgba(0,0,0,0.18);
-    overflow:hidden;
-  }
-  .home-img{display:block;width:100%;height:auto;}
-  .home-img.is-hover{
-    position:absolute;
-    inset:0;
-    opacity:0;
-    transition:opacity 220ms ease;
-  }
-  .home-card:hover .home-img.is-hover{opacity:1;}
-
-  .home-cta{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    font-size:34px;
-    font-weight:800;
-    letter-spacing:0.02em;
-    color:#fff;
-    opacity:0;
-    transition:opacity 220ms ease;
-    pointer-events:none;
-    text-shadow:0 10px 30px rgba(0,0,0,0.45);
-  }
-  .home-card:hover .home-cta{opacity:1;}
-
-  .pf-mini-info{
-    max-width:1100px;
-    margin:26px auto 0;
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:80px;
-    color:rgba(255,255,255,0.78);
-  }
-  .pf-mini-info .mini-left{width:58%;margin-left:-70px;}
-  .mini-strong{
-    font-size:25px;
-    font-weight:800;
-    line-height:1.35;
-    margin:0 0 18px;
-    color:#fff;
-    white-space:nowrap;
-  }
-  .mini-sub{
-    font-size:22px;
-    font-weight:700;
-    margin:0;
-    opacity:0.95;
-    white-space:normal;
-  }
-  .pf-mini-info .mini-right{
-    width:42%;
-    margin:0;
-    padding-left:18px;
-    list-style:disc;
-    white-space:nowrap;
-  }
-  .pf-mini-info .mini-right li{
-    margin:0 0 18px;
-    line-height:1.7;
-    font-size:20px;
-  }
-
-  .pf-mobile{margin-top:300px;}
-
-  /* -------------------------
-     5) 모바일 홈페이지 리디자인
-  ------------------------- */
-  .pf-mobile-row{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:70px;
-    padding-top:10px;
-    flex-wrap:nowrap;
-  }
-  .device-phone{
-    width:clamp(420px, 45vw, 650px);
-    margin:0;
-    flex:0 0 auto;
-  }
-  .device-phone .device-screen{
-    position:absolute;
-    left:18%;
-    top:11%;
-    width:64%;
-    height:72.5%;
-    overflow:hidden;
-    border-radius:48px 48px 0 0;
-    background:rgba(0,0,0,0.22);
-  }
-  .pf-mobile-info{
-    flex:1 1 0;
-    min-width:0;
-  }
-  .pf-bullets{
-    margin:0;
-    padding-left:18px;
-    color:rgba(255,255,255,0.78);
-    padding-top: 300px;
-  }
-  .pf-bullets li{
-    margin:10px 0;
-    line-height:1.7;
-    font-size:20px;
-  }
-  .pf-bullets li:last-child{margin-top:30px;}
-
-  /* Section 4 반응형(기존 값 유지) */
-  @media (max-width: 980px){
-    .sec-4{padding:80px 0 110px;}
-    .pf-counter{display:none;}
-
-    .pf-web-row,
-    .pf-mobile-row{
-      flex-direction:column;
-      gap:28px;
-    }
-    .pf-web-left,
-    .pf-web-right,
-    .pf-mobile-info{width:100%;}
-
-    .device-phone{width:100%;max-width:360px;}
-
-    .pf-mini-info{
-      flex-direction:column;
-      gap:10px;
-    }
-    .mini-sub{white-space:normal;}
-  }
-
-  /* =========================================================
-   Section 5 : Footer / Contact (이미지 기준)
+/* =========================================================
+   Section 5
 ========================================================= */
 .sec-5{
   background:#1a1a1a;
-  padding:180px 0 220px;
+  padding:160px 0 200px;
 }
-
-.sec5-inner{
-  max-width:1200px;
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-}
-
-/* 상단 메시지 */
-.sec5-message{
-  max-width:520px;
-}
-
 .sec5-title{
   font-size:28px;
-  font-weight:700;
-  margin-bottom:48px;
-  color:#fff;
+  margin-bottom:40px;
 }
-
 .sec5-desc{
   font-size:20px;
-  line-height:2.0;
-  color:rgba(255,255,255,0.85);
-  margin-bottom:14px;
+  line-height:1.9;
 }
-
-/* 하단 연락처 */
 .sec5-contact{
-  margin-top:240px; /* 이미지처럼 충분히 아래 */
-  display:flex;
-  flex-direction:column;
-  gap:22px;
+  margin-top:200px;
 }
+.contact-item{font-size:18px;margin-bottom:18px;}
+.contact-item a{color:#66e6d6;}
 
-.contact-item{
-  font-size:18px;
-  color:rgba(255,255,255,0.9);
-}
-
-.contact-item a{
-  color:#66e6d6;
-  text-decoration:none;
-}
-.contact-item a:hover{
-  text-decoration:underline;
-}
-
-/* 반응형 */
-@media (max-width: 980px){
-  .sec-5{
-    padding:120px 0 160px;
-  }
-
-  .sec5-contact{
-    margin-top:160px;
-  }
-}
-
-
-/* 하트 이펙트(SVG) */
-.heart{
-  position:fixed;
-  left:0; top:0;
-  transform:translate(-50%,-50%) scale(0.2);
-  z-index:999999;
-  pointer-events:none;
-  opacity:0;
-  animation:heartPop 900ms ease-out forwards;
-  filter:drop-shadow(0 10px 18px rgba(0,0,0,0.35));
-}
-.heart svg{
-  display:block;
-  width:28px;
-  height:28px;
-}
-
-@keyframes heartPop{
-  0%   {opacity:0; transform:translate(-50%,-50%) scale(0.2);}
-  20%  {opacity:1; transform:translate(-50%,-60%) scale(1.25);}
-  60%  {opacity:1; transform:translate(-50%,-110%) scale(1.0);}
-  100% {opacity:0; transform:translate(-50%,-150%) scale(0.9);}
-}
-.win-icons span{
-  cursor:pointer;         /* ✅ 클릭 커서 */
-  pointer-events:auto;    /* ✅ 혹시 막혀있으면 풀기 */
-}
-/* 모바일에서만 1·2섹션 배경 이미지 제거 */
-@media (max-width: 980px){
-
-  /* 1섹션: main_logo.png (sec-1::after) 제거 */
-  .sec-1::after{
-    content:none;          /* 가장 확실하게 제거 */
-    background:none !important;
-  }
-
-  /* 2섹션: Layer2_bg.png 이미지 레이어 제거 */
-  .sec-2 .sec2-bg{
-    display:none !important;
-  }
-}
 /* =========================================================
-   Mobile Layout Rebuild (content only)
-   - 붙여넣기 위치: <style> 맨 아래
+   Mobile (≤980px) — 통합
 ========================================================= */
-@media (max-width: 980px){
+@media (max-width:980px){
 
-  /* ---------- 공통: 모바일 기본 ---------- */
-  html, body{ overflow-x:hidden; }
-  .container{
-    width:100%;
-    max-width:none;
-    margin:0 auto;
-    padding:0 16px;
-    box-sizing:border-box;
-  }
-  /* PC에서 nowrap 걸어둔 곳들 모바일에서 해제 */
-  .intro h1,
-  .sec-2 .desc,
-  .pf-logo-meta,
-  .mini-strong,
-  .pf-mini-info .mini-right{
-    white-space:normal !important;
-  }
+  .container{width:100%;padding:0 16px;}
 
-  /* ---------- Section 1 ---------- */
+  /* Section 1 */
   .sec-1{
     height:auto;
-    min-height:100vh;
-    padding:72px 0 92px;
-    background:#1a1a1a; /* 배경 이미지 제거했으니 톤만 유지 */
+    padding:70px 0 40px;
   }
-
+  .sec-1::before,
+  .sec-1::after{display:none;}
   .intro{
     width:100%;
     padding-top:0;
-    margin-left:0;
   }
-  .intro .role{ font-size:15px; margin-bottom:14px; }
+  .intro .role{font-size:15px;margin-bottom:24px;}
   .intro h1{
     font-size:24px;
     line-height:1.55;
-    margin:14px 0 14px;
+    margin-bottom:36px;
+    white-space:normal;
   }
   .intro .desc{
     font-size:16px;
-    line-height:1.7;
-    margin-top:0;
+    line-height:1.9;
+    margin-bottom:40px;
   }
-
-  /* 네비: absolute 해제 → 버튼형 */
   .navi{
-    position:static;
-    left:auto; bottom:auto;
-    transform:none;
-    margin-top:22px;
-    gap:10px;
+    margin-top:28px;
+    gap:18px;
     flex-wrap:wrap;
-    justify-content:flex-start;
-  }
-  .navi a{
-    font-size:15px;
-    padding:10px 14px;
-    border:1px solid rgba(255,255,255,0.22);
-    border-radius:999px;
-    display:inline-flex;
-    align-items:center;
   }
 
-  /* 아래 화살표: 문서 흐름으로 */
-  .sec1-arrow{
-    position:static;
-    transform:none;
-    margin-top:26px;
-  }
-  .sec1-arrow p{ font-size:13px; }
-  .sec1-arrow img{ width:44px; height:auto; margin:8px auto 0; }
-
-  /* 모바일에서 black 텍스트가 어두워 보이면 흰색으로 */
-  .black{ color:#fff; }
-
-  /* ---------- Section 2 ---------- */
+  /* Section 2 — 거리 초기화 */
   .sec-2{
-    padding:86px 0 110px;
+    padding:80px 0 100px;
   }
   .sec2-inner{
-    width:100%;
     flex-direction:column;
-    gap:22px;
-    align-items:flex-start;
+    gap:40px;
   }
   .sec2-left{
     width:100%;
-    max-width:none;
     font-size:16px;
-    line-height:1.75;
+    line-height:2;
   }
-  .sec2-left .work{ font-size:22px; margin-bottom:10px; }
-  .sec2-left .mint{ font-size:16px; margin-bottom:14px; }
-  .sec-2 .desc{
-    font-size:16px;
-    line-height:1.75;
-    margin-top:10px;
-  }
-
-  /* 프로필 영역: 텍스트 아래로 자연스럽게 */
+  .sec2-left .work{font-size:22px;margin-bottom:32px;}
+  .sec2-left .mint{margin-bottom:36px;}
   .sec2-right{
     width:100%;
-    margin-top:8px;
-    align-items:flex-start;
+    margin-top:0;
   }
-  .sec2-right .avatar{
+  .avatar{
     width:220px;
     height:220px;
   }
-  .sec2-right .avatar img{
-    object-fit:cover;
-    object-position:center 20%; /* 얼굴 잘림 완화 */
-  }
-  .sec2-right .tag{ font-size:16px; margin-top:10px; }
+  .tag{font-size:16px;}
 
-  /* 2페이지 화살표도 흐름으로 */
-  .sec2-arrow{
-    position:static;
-    transform:none;
-    margin-top:26px;
-  }
-  .sec2-arrow > p{ font-size:13px; margin-bottom:6px; }
-  .sec2-arrow img{ width:44px; height:auto; margin:8px auto 0; }
-
-  /* ---------- Section 3 (SKILL) ---------- */
-  .skill-folder img{ width:92px; }
-  .skill-label{ font-size:16px; }
-
-  /* ---------- Section 4: 전체 간격 정리 ---------- */
-  .sec-4{
-    padding:90px 0 120px;
-  }
-  .sec4-head{
-    margin-top:0;
-    margin-bottom:60px;
-  }
-  .sec4-kicker{
-    font-size:16px;
-    line-height:1.6;
-  }
-  .pf + .pf{ margin-top:70px; }
-  .pf-titleline{ margin-bottom:22px; }
-  .pf-title{
-    font-size:18px;
-    margin-bottom:0;
-  }
-
-  /* 로고타입: 좌우 → 세로 */
-  .pf-logo{ min-height:auto; }
-  .pf-logo-wrap{ margin:24px 0 50px; }
-  .pf-logo-slide.is-active{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:16px;
-    padding-right:0;
-  }
-  .pf-logo-slide img{
-    width:100%;
-    max-width:360px;
-  }
-  .pf-logo-cap{
-    width:100%;
-    padding-right:0;
-  }
-  .pf-logo-meta{
-    font-size:15px;
-    line-height:1.7;
-  }
-  .pf-logo-meta li{ margin:0 0 12px; }
-  .pf-logo-meta li span{ font-size:14px; margin-bottom:6px; }
-
-  /* 로고 다음 버튼: 화면 안으로 */
-  .pf-logo-wrap .pf-arrow{
-    position:static;
-    transform:none;
-    margin-top:12px;
-    width:44px; height:44px;
-  }
-
-  /* 배너: 텍스트 줄간격 */
-  .pf-banner .pf-titleline p{
-    font-size:15px;
-    line-height:1.6;
-  }
-  .pf-banner-wrap{
-    margin:20px auto 50px;
-  }
-
-  /* 웹 광고페이지: 좌우 → 세로 */
-  .pf-web-row{
-    flex-direction:column;
-    gap:22px;
-    padding-top:0;
-  }
-  .pf-web-left, .pf-web-right{ width:100%; }
-  .pf-web .pf-web-left .pf-titleline p{
-    margin-top:10px;
-    font-size:15px;
-    line-height:1.6;
-  }
-
-  /* 모니터 목업: 스케일/마이너스 마진 제거 */
-  .device-monitor{
-    transform:none;
-    transform-origin:center;
-    margin:0;
-  }
-
-  /* 홈 카드 */
-  .home-card-title{ font-size:16px; }
-  .home-cta{ font-size:20px; }
-
-  /* 홈 카드 설명: 세로 */
-  .pf-mini-info{
-    margin:14px auto 0;
-    flex-direction:column;
-    gap:10px;
-  }
-  .pf-mini-info .mini-left{
-    width:100%;
-    margin-left:0;
-  }
-  .mini-strong{
-    font-size:18px;
-    line-height:1.4;
-  }
-  .mini-sub{ font-size:16px; }
-  .pf-mini-info .mini-right{
-    width:100%;
-    padding-left:18px;
-    list-style:disc;
-  }
-  .pf-mini-info .mini-right li{
-    font-size:15px;
-    line-height:1.7;
-    margin-bottom:8px;
-  }
-
-  /* 모바일 리디자인 섹션 */
-  .pf-mobile{ margin-top:60px; }
-  .pf-mobile-row{
-    flex-direction:column;
-    gap:18px;
-  }
-  .device-phone{
-    width:100%;
-    max-width:360px;
-  }
-  .pf-bullets{
-    padding-top:0;
-  }
-  .pf-bullets li{
-    font-size:15px;
-    line-height:1.7;
-  }
-
-  /* ---------- Section 5 ---------- */
-  .sec-5{ padding:110px 0 140px; }
-  .sec5-title{ font-size:22px; margin-bottom:20px; }
-  .sec5-desc{ font-size:16px; line-height:1.75; }
-  .sec5-contact{ margin-top:70px; gap:14px; }
-  .contact-item{ font-size:15px; }
-}
-/* ===============================
-   Mobile: Section 1 배경 완전 검정
-================================ */
-@media (max-width: 980px){
-
-  .sec-1{
-    background:#1a1a1a;
-  }
-
-  /* 좌우 분할 배경 제거 */
-  .sec-1::before{
-    background:#1a1a1a !important;
-  }
-
-  /* 혹시 남아있는 레이어 완전 제거 */
-  .sec-1::after{
-    display:none !important;
-    content:none !important;
-  }
-
-}
-@media (max-width: 980px){
-
-  .sec2-left,
-  .sec2-right{
-    opacity:1 !important;
-    transform:none !important;
-    transition:none !important;
-  }
-
-}
-
-
-    /* Mobile: 2섹션 H.Y.E 중앙 정렬 */
-@media (max-width: 980px){
-  .sec2-right{
-    align-items:center !important;
-    text-align:center;
-  }
-  .sec2-right .tag{
-    width:100%;
-    display:block;
-    text-align:center;
-  }
-}
-    /* Mobile: SKILL 창 글자 축소 + 내용 짤림 방지 */
-@media (max-width: 980px){
-
-  /* 타이틀(Design/Publishing/Work Style) */
-  .win-title{ font-size:20px; }
-
-  /* 리스트 글자 */
-  .win-list li{ font-size:16px; }
-
-  /* 포인트 문장 */
-  .win-point{ font-size:16px; line-height:1.7; }
-
-  /* 프레임 타이틀(SKILL) */
-  .skill-frame-title{ font-size:20px; }
-
-  /* 창 높이 고정 때문에 짤리는 것 방지 */
-  .win-design,
-  .win-pub,
-  .win-work,
-  .win-detailbox{
-    height:auto !important;
-  }
-
-  /* 내부 여백도 살짝 줄여서 공간 확보 */
-  .win-body{
-    padding:18px 18px 16px;
-  }
-}
-    /* Mobile: 로고타입 화살표 제거 */
-@media (max-width: 980px){
-  .pf-logo-wrap .pf-arrow{
-    display:none !important;
-  }
-}
-    /* Mobile: 로고타입 슬라이드 전부 표시 */
-@media (max-width: 980px){
-  .pf-logo-slide{
-    display:flex !important;
-    flex-direction:column;
-    align-items:flex-start;
-  }
-}
-    /* Mobile: 두 번째 로고 아래 배치 + 간격 */
-@media (max-width: 980px){
-  .pf-logo-slide:not(:first-child){
-    margin-top:48px;   /* 간격 조절 (40~60px 추천) */
-  }
-}
-    /* ===============================
-   Mobile: 로고타입 세로 배치
-================================ */
-@media (max-width: 980px){
-
-  /* 화살표 제거 */
-  .pf-logo-wrap .pf-arrow{
-    display:none !important;
-  }
-
-  /* 모든 로고 슬라이드 표시 */
-  .pf-logo-slide{
-    display:flex !important;
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  /* 두 번째 로고 아래로 간격 */
-  .pf-logo-slide:not(:first-child){
-    margin-top:48px;
-  }
-
-}
-
-
-    /* Mobile: 1섹션 문단 간격 크게 */
-@media (max-width: 980px){
-
-  .intro .role{
-    margin-bottom:28px;
-  }
-
-  .intro h1{
-    margin-bottom:36px;
-  }
-
-  .intro .desc{
-    margin-top:0;
-    margin-bottom:40px;
-    line-height:1.9;
-  }
-
-}
-/* Mobile: SKILL 창 차곡차곡 정렬 */
-@media (max-width: 980px){
+  /* Section 3 */
+  .skill-folder img{width:92px;}
+  .skill-label{font-size:16px;}
 
   .skill-frame{
-    height:auto;
+    width:94vw;
+    max-height:82vh;
+    overflow:auto;
   }
+  .skill-frame-title{font-size:18px;}
 
-  .skill-frame-body{
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-  }
-
-  /* absolute 전부 해제 */
-  .win{
-    position:relative !important;
-    left:auto !important;
-    top:auto !important;
-    right:auto !important;
-    width:100% !important;
-    height:auto !important;
-    transform:none !important;
-  }
-
-}
-/* Mobile: SKILL 창 크기 & 글자 축소 */
-@media (max-width: 980px){
-
-  /* 프레임 타이틀 */
-  .skill-frame-title{
-    font-size:18px;
-  }
-
-  /* 창 타이틀 */
-  .win-title{
-    font-size:18px;
-  }
-
-  /* 리스트 */
-  .win-list li{
-    font-size:14px;
-    margin:6px 0;
-  }
-
-  /* 포인트 문장 */
-  .win-point{
-    font-size:14px;
-    line-height:1.6;
-  }
-
-  /* 내부 여백 */
-  .win-body{
-    padding:14px 16px;
-  }
-
-}
-/* Mobile: 4섹션 모바일 목업 내부 보더 소량 축소 */
-@media (max-width: 980px){
-  .device-phone .device-screen{
-    border-radius:36px 36px 0 0;
-  }
-}
-    /* Mobile: 4섹션 모바일 목업 내부 보더 소량 축소 */
-@media (max-width: 980px){
-  .device-phone .device-screen{
-    border-radius:36px 36px 0 0;
-  }
-}
-    @media (max-width: 980px){
-  .sec-1{ padding-bottom:22px !important; }
-  .sec-2{ padding-top:22px !important; }
-}
-@media (max-width: 980px){
-
-  /* 프레임: 화면 밖으로 안 나가게 */
-  .skill-frame{
-    width:94vw !important;
-    height:auto !important;
-    max-height:82vh !important;  /* 너무 길면 내부 스크롤 */
-    overflow:auto !important;
-  }
-
-  .skill-frame-body{
-    padding:14px 12px !important;
-    display:flex !important;
-    flex-direction:column !important;
-    gap:12px !important;
-  }
-
-  /* 내부 창: 겹침 제거 + 폭 고정 */
-  .win{
-    position:relative !important;
-    left:auto !important; top:auto !important; right:auto !important;
-    width:100% !important;
-    height:auto !important;
-    transform:none !important;
-  }
-
-  /* 바(제목줄) 높이/타이포 축소 */
-  .skill-frame-bar{ height:46px !important; }
-  .skill-frame-title{ font-size:16px !important; }
-
-  .win-bar{ height:40px !important; }
-  .win-title{ font-size:16px !important; }
-
-  /* 본문 글자 더 축소 */
-  .win-body{ padding:12px 12px 10px !important; }
-  .win-list{ padding-left:18px !important; }
-
-  .win-list li{
-    font-size:13px !important;
-    margin:6px 0 !important;
-    line-height:1.55 !important;
-  }
-
-  .win-point{
-    font-size:13px !important;
-    line-height:1.55 !important;
-    white-space:normal !important; /* 줄바꿈 허용해서 짤림 방지 */
-  }
-
-  /* 아이콘도 조금 줄여서 공간 확보 */
-  .win-icons span{
-    width:12px !important;
-    height:12px !important;
-  }
-
-  /* Detail 링크가 가로로 튀는 문제 방지 */
-  .detail-link{
-    padding-left:0 !important;
-    font-size:18px !important;
-    width:auto !important;
-    height:auto !important;
-    margin:0 !important;
-  }
-}
-\
-/* Mobile: 2섹션 문단 간격 확대 */
-@media (max-width: 980px){
-
-  .sec2-left .work{
-    margin-bottom:32px !important;
-  }
-
-  .sec2-left .mint{
-    margin-bottom:36px !important;
-  }
-
-  .sec-2 .desc{
-    margin-top:0 !important;
-    line-height:2.05 !important;
-  }
-
-  /* 전체 문단 리듬 */
-  .sec2-left{
-    line-height:2.0 !important;
-  }
-}
-/* Mobile: SKILL 내부 2열 정렬 */
-@media (max-width: 980px){
-
-  .win-body{
-    display:flex !important;
-    align-items:flex-start;
-    gap:16px !important;
-  }
-
-  .win-list,
-  .win-point{
-    width:50% !important;
-  }
-
-}
-/* Mobile: Design – 흰색 왼쪽 / 민트 오른쪽 */
-@media (max-width: 980px){
-
-  .win-design .win-body{
-    flex-direction:row !important;
-  }
-
-  .win-design .win-list{
-    order:1;
-  }
-
-  .win-design .win-point{
-    order:2;
-    text-align:left;
-  }
-
-}
-/* Mobile: Publishing – 민트 왼쪽 / 흰색 오른쪽 */
-@media (max-width: 980px){
-
-  .win-pub .win-body{
-    flex-direction:row !important;
-  }
-
-  .win-pub .win-point{
-    order:1;
-    text-align:left;
-  }
-
-  .win-pub .win-list{
-    order:2;
-  }
-
-}
-@media (max-width: 980px){
-
-  .win-point{
-    white-space:normal !important;
-  }
-
-  .win-list li{
-    word-break:keep-all;
-  }
-
-}
-    /* ===============================
-   Mobile: SKILL 정렬/여백 최종
-================================ */
-@media (max-width: 980px){
-
-  /* 공통: 2열 레이아웃 유지 */
-  .win-body{
-    display:flex !important;
-    align-items:flex-start;
-    gap:16px !important;
-  }
-  .win-list, .win-point{
-    width:50% !important;
-  }
-
-  /* ✅ Design: 흰(리스트) 왼쪽 / 민트(포인트) 오른쪽 */
-  .win-design .win-list{ order:1; margin-top:-10px !important; } /* -10px */
-  .win-design .win-point{ order:2; text-align:left; }
-
-  /* ✅ Publishing: 흰(리스트) 왼쪽 / 민트(포인트) 오른쪽 */
-  .win-pub .win-list{ order:1; margin-top:10px !important; }   /* +10px */
-  .win-pub .win-point{ order:2; text-align:left; }
-
-  /* 줄바꿈/삐져나옴 방지 */
-  .win-point{ white-space:normal !important; }
-}
-/* Mobile: 2섹션 흔들림/떠있음 방지 */
-@media (max-width: 980px){
-  .sec2-right{ margin-top:0 !important; }
-  .sec-2 .sec2-bg{ display:none !important; } /* 배경 이미지는 이미 삭제했다면 유지용 */
-  .sec2-left, .sec2-right{
-    transition:none !important;
-    transform:none !important;
-    opacity:1 !important;
-  }
+  /* Section 5 */
+  .sec-5{padding:110px 0 140px;}
+  .sec5-title{font-size:22px;}
+  .sec5-desc{font-size:16px;}
+  .sec5-contact{margin-top:70px;}
 }
 
-/* Mobile: 섹션1 Next 화살표를 섹션1 하단에 고정 */
-@media (max-width: 980px){
-  .sec-1{ position:relative; }
-
-  .sec1-arrow{
-    position:absolute !important;
-    left:50%;
-    bottom:14px;
-    transform:translateX(-50%) !important;
-    margin-top:0 !important;
-  }
-
-  /* 화살표가 가려지지 않게 섹션1 아래 여백 확보 */
-  .sec-1{ padding-bottom:72px !important; }
-}
-@media (max-width: 980px){
-  .sec1-arrow,
-  .sec2-arrow{
-    display:none !important;
-  }
-}
-@media (max-width: 980px){
-
-  /* 1섹션이 100vh로 고정되면 간격이 절대 안 줄어듦 → 모바일은 auto로 */
-  .sec-1{
-    height:auto !important;
-    min-height:0 !important;
-    padding:70px 0 24px !important; /* 필요시 조절 */
-  }
-
-  /* 1섹션 네비가 bottom:-550px라서 섹션이 길어짐 → 모바일은 일반 흐름으로 */
-  .navi{
-    position:static !important;
-    left:auto !important;
-    bottom:auto !important;
-    transform:none !important;
-
-    margin-top:28px !important;
-    gap:18px !important;
-    justify-content:flex-start !important;
-    flex-wrap:wrap;
-  }
-}
-@media (max-width: 980px){
-  .sec2-right{
-    margin-top:0 !important; /* PC용 -200px 제거 */
-  }
-
-  .sec2-left,
-  .sec2-right{
-    opacity:1 !important;
-    transform:none !important;
-    transition:none !important;
-  }
-}
-@media (max-width: 980px){
-  .sec-1{ padding-top:48px !important; }
-}
-
-    @media (max-width: 980px){
-
-  /* 1 → 2 섹션 사이 거리 복구 */
-  .sec-2{
-    padding-top: 80px;  
-  }
-
-}
   </style>
 
   <script src="script/jquery-3.6.2.min.js"></script>
@@ -1870,312 +284,59 @@
 
   <script>
   $(function(){
-        $win.on('scroll', onFirstScroll);
-        $win.on('scroll', onScroll2);
-       /* ✅ Section 3: SKILL 모달 (항상 동작해야 하므로 최상단) */
+
+  /* ===============================
+     Section 3 : SKILL Modal
+  =============================== */
   $('.skill-folder').on('click', function(){
     $('#skillModal').addClass('active').attr('aria-hidden','false');
-    $(this).attr('aria-expanded','true');
   });
 
   $('.skill-close, .skill-dim').on('click', function(){
     $('#skillModal').removeClass('active').attr('aria-hidden','true');
-    $('.skill-folder').attr('aria-expanded','false');
   });
 
-  /* ✅ Mobile: 섹션1~2 스크롤 연동만 비활성화 */
-  if (window.matchMedia('(max-width: 980px)').matches) {
-    // 여기서는 "섹션1~2 관련"만 끄기 (전체 off 금지)
-    $('.sec-2').addClass('active');
-    $('.sec2-left, .sec2-right').css({ opacity: 1, transform: 'none', transition: 'none' });
+  /* ===============================
+     Section 4 : Logo Next
+  =============================== */
+  (function(){
+    var $slides = $('.pf-logo-slide');
+    var $btn = $('.pf-arrow-next');
+    if(!$slides.length || !$btn.length) return;
 
-    // 섹션1 화살표/섹션2 화살표 스크롤만 막고 싶다면(선택)
-    // $('.sec1-arrow a, .sec2-arrow a').off('click');
-
-    return; // 모바일은 여기서 종료 (하지만 SKILL 바인딩은 이미 끝남)
-  }
-
-  }
-
-    /* =========================================================
-       Section 1~2: 첫 진입 애니메이션/등장
-       - 기존 동작 유지(정리만)
-    ========================================================= */
-    var $win    = $(window);
-    var $htmlbd = $('html, body');
-
-    var $sec1 = $('.sec-1');
-    var $sec2 = $('.sec-2');
-    var $sec2BgImg = $('.sec-2 .sec2-bg img');
-
-    if(!$sec1.length || !$sec2BgImg.length) return;
-
-    var startPull = 550;
-    var endBgY    = 50;
-    var duration  = 2000;
-
-    var triggered = false;
-    var finished  = false;
-    var move      = false;
-    var hide      = 0;
-
-    function setBgYPercent(pct){
-      $sec1.get(0).style.setProperty('--bgY', pct + '%');
-    }
-    function setImgY(px){
-      $sec2BgImg.get(0).style.setProperty('--imgY', px + 'px');
-    }
-
-    function setStart(){
-      $sec1.get(0).style.setProperty('--bgY', 'calc(' + endBgY + '% - ' + startPull + 'px)');
-
-      var imgH = $sec2BgImg.get(0).getBoundingClientRect().height;
-      hide = imgH * 0.07;
-      setImgY(-hide);
-    }
-
-    function animateToEnd(){
-      if(move) return;
-      move = true;
-
-      $({p:0}).stop().animate(
-        {p:1},
-        {
-          duration: duration,
-          easing: 'easeOutCubic',
-          step: function(now){
-            var moveY = startPull * (1 - now);
-            $sec1.get(0).style.setProperty('--bgY', 'calc(' + endBgY + '% - ' + moveY + 'px)');
-            setImgY(-hide * (1 - now));
-          },
-          complete: function(){
-            setBgYPercent(endBgY);
-            setImgY(0);
-            finished = true;
-            move = false;
-            $win.off('scroll', onFirstScroll);
-          }
-        }
-      );
-    }
-
-    function onFirstScroll(){
-      if(triggered || finished) return;
-      triggered = true;
-      animateToEnd();
-    }
-
-    function onScroll2(){
-      var sec2Top = $sec2.offset().top;
-      var crtPos  = $win.scrollTop();
-      var isAct   = $sec2.hasClass('active');
-
-      if(!isAct && crtPos >= sec2Top - 300){
-        $sec2.addClass('active');
-      }else if(isAct && crtPos < sec2Top - 300){
-        $sec2.removeClass('active');
-      }
-    }
-
-    setStart();
-    $win.on('scroll', onFirstScroll);
-    $win.on('scroll', onScroll2);
-    onScroll2();
-
-    /* =========================================================
-       아래 화살표 스크롤
-    ========================================================= */
-    $('.sec1-arrow a').on('click', function(e){
-      e.preventDefault();
-      if(move) return;
-      move = true;
-
-      var top = $('#sec2').offset().top;
-      $htmlbd.stop().animate({scrollTop: top}, 700, function(){ move = false; });
+    $btn.on('click', function(){
+      var idx = $slides.filter('.is-active').index();
+      var next = (idx + 1) % $slides.length;
+      $slides.removeClass('is-active').eq(next).addClass('is-active');
     });
+  })();
 
-    $('.sec2-arrow a').on('click', function(e){
-      e.preventDefault();
-      if(move) return;
-      move = true;
+  /* ===============================
+     Section 4 : Banner Auto
+  =============================== */
+  (function(){
+    var $slides = $('.pf-banner-visual');
+    var $dots = $('.dot');
+    if(!$slides.length) return;
 
-      var top = $('#sec3').offset().top - ($win.height() * 0.10);
-      $htmlbd.stop().animate({scrollTop: top}, 700, function(){ move = false; });
+    var cur = 0;
+    function set(i){
+      cur=i;
+      $slides.removeClass('is-active').eq(i).addClass('is-active');
+      $dots.removeClass('is-active').eq(i).addClass('is-active');
+    }
+    set(0);
+    setInterval(function(){
+      set((cur+1)%$slides.length);
+    },3000);
+
+    $dots.on('click', function(){
+      set($(this).index());
     });
+  })();
 
-    /* =========================================================
-       Section 3: SKILL 모달
-    ========================================================= */
-    $('.skill-folder').on('click', function(){
-      $('#skillModal').addClass('active').attr('aria-hidden','false');
-      $(this).attr('aria-expanded','true');
-    });
-
-    $('.skill-close, .skill-dim').on('click', function(){
-      $('#skillModal').removeClass('active').attr('aria-hidden','true');
-      $('.skill-folder').attr('aria-expanded','false');
-    });
-
-    /* =========================================================
-       Section 4: 로고타입 슬라이드(다음)
-    ========================================================= */
-    (function(){
-      var $wrap = $('.pf-logo');
-      if(!$wrap.length) return;
-
-      var $slides = $wrap.find('.pf-logo-slide');
-      var $btnNext = $wrap.find('.pf-arrow-next');
-      if(!$slides.length || !$btnNext.length) return;
-
-      $btnNext.on('click', function(e){
-        e.preventDefault();
-        var $cur = $slides.filter('.is-active');
-        var curIdx = $cur.length ? Number($cur.attr('data-idx')) : 0;
-        var nextIdx = (curIdx + 1) % $slides.length;
-
-        $slides.removeClass('is-active');
-        $slides.filter('[data-idx="'+ nextIdx +'"]').addClass('is-active');
-      });
-    })();
-
-    /* =========================================================
-       Section 4: 배너 자동(3초) + 불릿 연동
-    ========================================================= */
-    (function(){
-      var $section = $('.pf-banner');
-      if(!$section.length) return;
-
-      var $visuals = $section.find('.pf-banner-visual');
-      var $dots    = $section.find('.pf-dots .dot');
-      if(!$visuals.length || !$dots.length) return;
-
-      var cur = $visuals.filter('.is-active').length
-        ? Number($visuals.filter('.is-active').attr('data-idx'))
-        : 0;
-
-      var timer = null;
-      var delay = 3000;
-
-      function setActive(idx){
-        cur = idx;
-
-        $visuals.removeClass('is-active');
-        $visuals.filter('[data-idx="'+ idx +'"]').addClass('is-active');
-
-        $dots.removeClass('is-active').attr('aria-selected', 'false');
-        $dots.eq(idx).addClass('is-active').attr('aria-selected', 'true');
-      }
-
-      function next(){
-        setActive((cur + 1) % $visuals.length);
-      }
-
-      function start(){
-        stop();
-        timer = setInterval(next, delay);
-      }
-
-      function stop(){
-        if(timer){ clearInterval(timer); timer = null; }
-      }
-
-      setActive(cur);
-      start();
-
-      $dots.on('click', function(e){
-        e.preventDefault();
-        setActive($dots.index(this));
-        start();
-      });
-
-      $section.on('mouseenter', stop);
-      $section.on('mouseleave', start);
-    })();
-
-    /* =========================================================
-       디바이스 내부 스크롤(모니터/핸드폰 공통)
-       - 중복 코드 제거(하나로 통일)
-    ========================================================= */
-    (function(){
-      function bindInnerScroll($screen, speed){
-        var $content = $screen.find('.device-content');
-        if(!$screen.length || !$content.length) return;
-
-        var currentY = 0;
-
-        function apply(){
-          var screenH = $screen.height();
-          var contentH = $content.height();
-          var maxScroll = contentH - screenH;
-
-          if(maxScroll <= 0){
-            currentY = 0;
-            $content.css('transform','translateY(0px)');
-            return;
-          }
-
-          currentY = Math.max(0, Math.min(currentY, maxScroll));
-          $content.css('transform','translateY(' + (-currentY) + 'px)');
-        }
-
-        // 로딩/리사이즈 대응
-        $content.on('load', apply);
-        $(window).on('resize', apply);
-        apply();
-
-        var screenEl = $screen.get(0);
-
-        screenEl.addEventListener('wheel', function(e){
-          // 스크롤 가능한 경우에만 막기(중요)
-          var screenH = $screen.height();
-          var contentH = $content.height();
-          var maxScroll = contentH - screenH;
-          if(maxScroll <= 0) return;
-
-          e.preventDefault();
-
-          currentY += e.deltaY * speed;
-          apply();
-        }, { passive:false });
-      }
-
-      bindInnerScroll($('.device-monitor .device-screen'), 0.35);
-      bindInnerScroll($('.device-phone .device-screen'), 0.35);
-    })();
-/* =========================
-   SKILL 내부 창 X(ㅡ ㅁ X) 하트 이펙트 (이벤트 위임)
-========================= */
-function spawnHeart(el){
-  var rect = el.getBoundingClientRect();
-
-  var heart = document.createElement('span');
-  heart.className = 'heart';
-
-  // ✅ 폰트 영향 없는 SVG 하트
-  heart.innerHTML =
-    '<svg viewBox="0 0 24 24" aria-hidden="true">' +
-      '<path fill="#ff4d6d" d="M12 21s-7.2-4.6-9.6-8.6C.7 9.6 2.1 6.8 4.8 6.1c1.5-.4 3 .1 4.1 1.2L12 10.4l3.1-3.1c1.1-1.1 2.6-1.6 4.1-1.2 2.7.7 4.1 3.5 2.4 6.3C19.2 16.4 12 21 12 21z"/>' +
-    '</svg>';
-
-  heart.style.left = (rect.left + rect.width / 2) + 'px';
-  heart.style.top  = (rect.top  + rect.height / 2) + 'px';
-
-  document.body.appendChild(heart);
-
-  setTimeout(function(){
-    if(heart && heart.parentNode) heart.parentNode.removeChild(heart);
-  }, 900);
-}
-
-/* ✅ 이벤트 위임: ㅡㅁX의 X(i-close) 클릭 시 하트 생성 (하나만 남김) */
-$(document).on('click', '#skillModal .win-icons .i-close', function(e){
-  e.preventDefault();
-  e.stopPropagation();
-  spawnHeart(this);  // ✅ jQuery 객체 말고 DOM 요소로 전달
 });
 
-
-  });
   </script>
 </head>
 
@@ -2525,6 +686,7 @@ $(document).on('click', '#skillModal .win-icons .i-close', function(e){
 </main>
 </body>
 </html>
+
 
 
 
