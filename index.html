@@ -1122,26 +1122,195 @@
   cursor:pointer;         /* ✅ 클릭 커서 */
   pointer-events:auto;    /* ✅ 혹시 막혀있으면 풀기 */
 }
+/* =========================
+   Mobile only patch (<=980px)
+   - PC 영향 없음
+========================= */
+@media (max-width:980px){
+
+  /* 공통 컨테이너 폭 */
+  .container,
+  .sec2-inner{
+    width:100%;
+    max-width:100%;
+    padding-left:20px;
+    padding-right:20px;
+    box-sizing:border-box;
+  }
+
+  /* ====== Section 1 ====== */
+  .sec-1{
+    height:auto;
+    min-height:100vh;
+  }
+  .intro{
+    width:100%;
+    margin-left:0;
+    padding-top:44px;
+  }
+  .intro .role,
+  .intro h1,
+  .intro .desc{
+    max-width:none;
+    margin-left:0;
+    margin-right:0;
+  }
+  .intro h1{
+    white-space:normal;   /* 모바일에서 줄바꿈 허용 */
+    line-height:1.45;
+    margin-top:24px;
+    margin-bottom:26px;
+    font-size:28px;
+  }
+  .intro .desc{
+    font-size:18px;
+  }
+
+  /* 네비는 모바일에서 화면 밖으로 튀는 값(-550px)이라 숨김 */
+  .navi{display:none;}
+
+  /* 모바일에서는 1번 화살표 숨김(원하면 주석 처리) */
+  .sec1-arrow{display:none;}
+
+  /* ====== Section 2 ====== */
+  .sec-2{
+    padding:90px 0 110px;
+    min-height:auto;
+  }
+
+  /* 배경 이미지가 콘텐츠를 덮는 느낌이면 시각적 강도만 낮춤 */
+  .sec-2 .sec2-bg{
+    z-index:1;
+    opacity:0.35;
+  }
+  .sec2-inner{
+    position:relative;
+    z-index:2;
+    flex-direction:column;
+    gap:34px;
+    align-items:flex-start;
+  }
+
+  .sec2-left{
+    width:100%;
+    max-width:none;
+    font-size:18px;
+    line-height:1.8;
+    opacity:1;               /* ✅ 모바일에서 기본 표시 */
+    transform:none !important;/* ✅ 애니메이션 영향 제거 */
+    transition:none !important;
+  }
+  .sec2-left .work{font-size:22px;}
+  .sec2-left .mint{font-size:18px;margin-bottom:26px;}
+  .sec-2 .desc{
+    white-space:normal;  /* ✅ 모바일 줄바꿈 허용 */
+    line-height:1.65;
+    margin-top:22px;
+    font-size:18px;
+  }
+
+  .sec2-right{
+    width:100%;
+    margin-top:0;
+    opacity:1;                 /* ✅ 모바일에서 기본 표시 */
+    transform:none !important;
+    transition:none !important;
+    align-items:flex-start;
+  }
+  .sec2-right .avatar{
+    width:240px;
+    height:240px;
+  }
+  .sec2-right .tag{font-size:18px;}
+
+  /* 모바일에서 2페이지 화살표 숨김(원하면 주석 처리) */
+  .sec2-arrow{display:none;}
+
+  /* ====== Section 4 (가독성/폭 안전) ====== */
+  .pf-logo-slide.is-active{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:18px;
+    padding-right:0;
+  }
+  .pf-logo-cap{
+    width:100%;
+    padding-right:0;
+  }
+  .pf-logo-meta{
+    white-space:normal;
+  }
+
+  /* 로고 슬라이드 화살표(모바일에서 화면 밖으로 가기 쉬워서 아래로 내림) */
+  .pf-logo-wrap .pf-arrow{
+    left:auto;
+    right:18px;
+    top:auto;
+    bottom:-56px;
+    transform:none;
+  }
+}
 
   </style>
 
   <script src="script/jquery-3.6.2.min.js"></script>
   <script src="script/jquery-ui.min.js" type="text/javascript"></script>
+<script>
+$(function(){
 
-  <script>
-  $(function(){
+  /* =========================
+     Mobile only guard (<=980px)
+     - 모바일에서 2페이지가 안 보이는 문제 해결
+     - PC 기존 동작 유지
+  ========================= */
+  var mq = window.matchMedia('(max-width: 980px)');
+  var isMobile = mq.matches;
 
-    /* =========================================================
-       Section 1~2: 첫 진입 애니메이션/등장
-       - 기존 동작 유지(정리만)
-    ========================================================= */
-    var $win    = $(window);
-    var $htmlbd = $('html, body');
+  function forceSec2VisibleOnMobile(){
+    if(!isMobile) return;
+
+    // sec2 애니메이션 상태와 무관하게 항상 보이게
+    $('.sec-2').addClass('active');
+    $('.sec2-left, .sec2-right').css({
+      opacity: 1,
+      transform: 'none',
+      transition: 'none'
+    });
+  }
+
+  forceSec2VisibleOnMobile();
+  // 회전/리사이즈 시에도 반영
+  if(mq.addEventListener){
+    mq.addEventListener('change', function(e){
+      isMobile = e.matches;
+      forceSec2VisibleOnMobile();
+    });
+  }else{
+    mq.addListener(function(e){
+      isMobile = e.matches;
+      forceSec2VisibleOnMobile();
+    });
+  }
+
+  /* =========================================================
+     공통 변수
+  ========================================================= */
+  var $win    = $(window);
+  var $htmlbd = $('html, body');
+
+  /* =========================================================
+     Section 1~2: 첫 진입 애니메이션/등장
+     - PC에서만 실행 (모바일은 위에서 강제 표시)
+     - ✅ 기존의 "return"을 제거해서 아래 기능들이 죽지 않게 함
+  ========================================================= */
+  (function(){
+    if(isMobile) return;
 
     var $sec1 = $('.sec-1');
     var $sec2 = $('.sec-2');
     var $sec2BgImg = $('.sec-2 .sec2-bg img');
 
+    // 여기서 return해도 "이 블록만" 끝나게 IIFE로 감쌈
     if(!$sec1.length || !$sec2BgImg.length) return;
 
     var startPull = 550;
@@ -1216,9 +1385,7 @@
     $win.on('scroll', onScroll2);
     onScroll2();
 
-    /* =========================================================
-       아래 화살표 스크롤
-    ========================================================= */
+    /* 아래 화살표 스크롤(PC에서만) */
     $('.sec1-arrow a').on('click', function(e){
       e.preventDefault();
       if(move) return;
@@ -1237,180 +1404,187 @@
       $htmlbd.stop().animate({scrollTop: top}, 700, function(){ move = false; });
     });
 
-    /* =========================================================
-       Section 3: SKILL 모달
-    ========================================================= */
-    $('.skill-folder').on('click', function(){
-      $('#skillModal').addClass('active').attr('aria-hidden','false');
-      $(this).attr('aria-expanded','true');
+  })();
+
+  /* =========================================================
+     Section 3: SKILL 모달
+  ========================================================= */
+  $('.skill-folder').on('click', function(){
+    $('#skillModal').addClass('active').attr('aria-hidden','false');
+    $(this).attr('aria-expanded','true');
+  });
+
+  $('.skill-close, .skill-dim').on('click', function(){
+    $('#skillModal').removeClass('active').attr('aria-hidden','true');
+    $('.skill-folder').attr('aria-expanded','false');
+  });
+
+  /* =========================================================
+     Section 4: 로고타입 슬라이드(다음)
+  ========================================================= */
+  (function(){
+    var $wrap = $('.pf-logo');
+    if(!$wrap.length) return;
+
+    var $slides = $wrap.find('.pf-logo-slide');
+    var $btnNext = $wrap.find('.pf-arrow-next');
+    if(!$slides.length || !$btnNext.length) return;
+
+    $btnNext.on('click', function(e){
+      e.preventDefault();
+      var $cur = $slides.filter('.is-active');
+      var curIdx = $cur.length ? Number($cur.attr('data-idx')) : 0;
+      var nextIdx = (curIdx + 1) % $slides.length;
+
+      $slides.removeClass('is-active');
+      $slides.filter('[data-idx="'+ nextIdx +'"]').addClass('is-active');
     });
+  })();
 
-    $('.skill-close, .skill-dim').on('click', function(){
-      $('#skillModal').removeClass('active').attr('aria-hidden','true');
-      $('.skill-folder').attr('aria-expanded','false');
-    });
+  /* =========================================================
+     Section 4: 배너 자동(3초) + 불릿 연동
+  ========================================================= */
+  (function(){
+    var $section = $('.pf-banner');
+    if(!$section.length) return;
 
-    /* =========================================================
-       Section 4: 로고타입 슬라이드(다음)
-    ========================================================= */
-    (function(){
-      var $wrap = $('.pf-logo');
-      if(!$wrap.length) return;
+    var $visuals = $section.find('.pf-banner-visual');
+    var $dots    = $section.find('.pf-dots .dot');
+    if(!$visuals.length || !$dots.length) return;
 
-      var $slides = $wrap.find('.pf-logo-slide');
-      var $btnNext = $wrap.find('.pf-arrow-next');
-      if(!$slides.length || !$btnNext.length) return;
+    var cur = $visuals.filter('.is-active').length
+      ? Number($visuals.filter('.is-active').attr('data-idx'))
+      : 0;
 
-      $btnNext.on('click', function(e){
-        e.preventDefault();
-        var $cur = $slides.filter('.is-active');
-        var curIdx = $cur.length ? Number($cur.attr('data-idx')) : 0;
-        var nextIdx = (curIdx + 1) % $slides.length;
+    var timer = null;
+    var delay = 3000;
 
-        $slides.removeClass('is-active');
-        $slides.filter('[data-idx="'+ nextIdx +'"]').addClass('is-active');
-      });
-    })();
+    function setActive(idx){
+      cur = idx;
 
-    /* =========================================================
-       Section 4: 배너 자동(3초) + 불릿 연동
-    ========================================================= */
-    (function(){
-      var $section = $('.pf-banner');
-      if(!$section.length) return;
+      $visuals.removeClass('is-active');
+      $visuals.filter('[data-idx="'+ idx +'"]').addClass('is-active');
 
-      var $visuals = $section.find('.pf-banner-visual');
-      var $dots    = $section.find('.pf-dots .dot');
-      if(!$visuals.length || !$dots.length) return;
+      $dots.removeClass('is-active').attr('aria-selected', 'false');
+      $dots.eq(idx).addClass('is-active').attr('aria-selected', 'true');
+    }
 
-      var cur = $visuals.filter('.is-active').length
-        ? Number($visuals.filter('.is-active').attr('data-idx'))
-        : 0;
+    function next(){
+      setActive((cur + 1) % $visuals.length);
+    }
 
-      var timer = null;
-      var delay = 3000;
+    function start(){
+      stop();
+      timer = setInterval(next, delay);
+    }
 
-      function setActive(idx){
-        cur = idx;
+    function stop(){
+      if(timer){ clearInterval(timer); timer = null; }
+    }
 
-        $visuals.removeClass('is-active');
-        $visuals.filter('[data-idx="'+ idx +'"]').addClass('is-active');
+    setActive(cur);
+    start();
 
-        $dots.removeClass('is-active').attr('aria-selected', 'false');
-        $dots.eq(idx).addClass('is-active').attr('aria-selected', 'true');
-      }
-
-      function next(){
-        setActive((cur + 1) % $visuals.length);
-      }
-
-      function start(){
-        stop();
-        timer = setInterval(next, delay);
-      }
-
-      function stop(){
-        if(timer){ clearInterval(timer); timer = null; }
-      }
-
-      setActive(cur);
+    $dots.on('click', function(e){
+      e.preventDefault();
+      setActive($dots.index(this));
       start();
+    });
 
-      $dots.on('click', function(e){
-        e.preventDefault();
-        setActive($dots.index(this));
-        start();
-      });
+    $section.on('mouseenter', stop);
+    $section.on('mouseleave', start);
+  })();
 
-      $section.on('mouseenter', stop);
-      $section.on('mouseleave', start);
-    })();
+  /* =========================================================
+     디바이스 내부 스크롤(모니터/핸드폰 공통)
+     - wheel은 모바일에서 안 먹는 경우가 많아서 그대로 두되,
+       안전하게 "요소 있으면만" 바인딩
+  ========================================================= */
+  (function(){
+    function bindInnerScroll($screen, speed){
+      if(!$screen.length) return;
 
-    /* =========================================================
-       디바이스 내부 스크롤(모니터/핸드폰 공통)
-       - 중복 코드 제거(하나로 통일)
-    ========================================================= */
-    (function(){
-      function bindInnerScroll($screen, speed){
-        var $content = $screen.find('.device-content');
-        if(!$screen.length || !$content.length) return;
+      var $content = $screen.find('.device-content');
+      if(!$content.length) return;
 
-        var currentY = 0;
+      var currentY = 0;
 
-        function apply(){
-          var screenH = $screen.height();
-          var contentH = $content.height();
-          var maxScroll = contentH - screenH;
+      function apply(){
+        var screenH = $screen.height();
+        var contentH = $content.height();
+        var maxScroll = contentH - screenH;
 
-          if(maxScroll <= 0){
-            currentY = 0;
-            $content.css('transform','translateY(0px)');
-            return;
-          }
-
-          currentY = Math.max(0, Math.min(currentY, maxScroll));
-          $content.css('transform','translateY(' + (-currentY) + 'px)');
+        if(maxScroll <= 0){
+          currentY = 0;
+          $content.css('transform','translateY(0px)');
+          return;
         }
 
-        // 로딩/리사이즈 대응
-        $content.on('load', apply);
-        $(window).on('resize', apply);
-        apply();
-
-        var screenEl = $screen.get(0);
-
-        screenEl.addEventListener('wheel', function(e){
-          // 스크롤 가능한 경우에만 막기(중요)
-          var screenH = $screen.height();
-          var contentH = $content.height();
-          var maxScroll = contentH - screenH;
-          if(maxScroll <= 0) return;
-
-          e.preventDefault();
-
-          currentY += e.deltaY * speed;
-          apply();
-        }, { passive:false });
+        currentY = Math.max(0, Math.min(currentY, maxScroll));
+        $content.css('transform','translateY(' + (-currentY) + 'px)');
       }
 
-      bindInnerScroll($('.device-monitor .device-screen'), 0.35);
-      bindInnerScroll($('.device-phone .device-screen'), 0.35);
-    })();
-    
-/* =========================
-   SKILL 내부 창 X(ㅡ ㅁ X) 하트 이펙트 (이벤트 위임)
-========================= */
-function spawnHeart(el){
-  var rect = el.getBoundingClientRect();
+      // 로딩/리사이즈 대응
+      $(window).on('resize', apply);
+      // 이미지 로드 타이밍 보완
+      $content.each(function(){
+        if(this.complete) apply();
+        else $(this).on('load', apply);
+      });
+      apply();
 
-  var heart = document.createElement('span');
-  heart.className = 'heart';
+      var screenEl = $screen.get(0);
 
-  // ✅ 폰트 영향 없는 SVG 하트
-  heart.innerHTML =
-    '<svg viewBox="0 0 24 24" aria-hidden="true">' +
-      '<path fill="#ff4d6d" d="M12 21s-7.2-4.6-9.6-8.6C.7 9.6 2.1 6.8 4.8 6.1c1.5-.4 3 .1 4.1 1.2L12 10.4l3.1-3.1c1.1-1.1 2.6-1.6 4.1-1.2 2.7.7 4.1 3.5 2.4 6.3C19.2 16.4 12 21 12 21z"/>' +
-    '</svg>';
+      // PC/트랙패드 wheel
+      screenEl.addEventListener('wheel', function(e){
+        var screenH = $screen.height();
+        var contentH = $content.height();
+        var maxScroll = contentH - screenH;
+        if(maxScroll <= 0) return;
 
-  heart.style.left = (rect.left + rect.width / 2) + 'px';
-  heart.style.top  = (rect.top  + rect.height / 2) + 'px';
+        e.preventDefault();
+        currentY += e.deltaY * speed;
+        apply();
+      }, { passive:false });
+    }
 
-  document.body.appendChild(heart);
+    bindInnerScroll($('.device-monitor .device-screen'), 0.35);
+    bindInnerScroll($('.device-phone .device-screen'), 0.35);
+  })();
 
-  setTimeout(function(){
-    if(heart && heart.parentNode) heart.parentNode.removeChild(heart);
-  }, 900);
-}
+  /* =========================
+     SKILL 내부 창 X(ㅡ ㅁ X) 하트 이펙트 (이벤트 위임)
+  ========================= */
+  function spawnHeart(el){
+    var rect = el.getBoundingClientRect();
 
-/* ✅ 이벤트 위임: ㅡㅁX의 X(i-close) 클릭 시 하트 생성 (하나만 남김) */
-$(document).on('click', '#skillModal .win-icons .i-close', function(e){
-  e.preventDefault();
-  e.stopPropagation();
-  spawnHeart(this);  // ✅ jQuery 객체 말고 DOM 요소로 전달
-});
+    var heart = document.createElement('span');
+    heart.className = 'heart';
 
+    heart.innerHTML =
+      '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+        '<path fill="#ff4d6d" d="M12 21s-7.2-4.6-9.6-8.6C.7 9.6 2.1 6.8 4.8 6.1c1.5-.4 3 .1 4.1 1.2L12 10.4l3.1-3.1c1.1-1.1 2.6-1.6 4.1-1.2 2.7.7 4.1 3.5 2.4 6.3C19.2 16.4 12 21 12 21z"/>' +
+      '</svg>';
+
+    heart.style.left = (rect.left + rect.width / 2) + 'px';
+    heart.style.top  = (rect.top  + rect.height / 2) + 'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+      if(heart && heart.parentNode) heart.parentNode.removeChild(heart);
+    }, 900);
+  }
+
+  $(document).on('click', '#skillModal .win-icons .i-close', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    spawnHeart(this);
   });
-  </script>
+
+});
+</script>
+
 </head>
 
 <body>
@@ -1759,4 +1933,5 @@ $(document).on('click', '#skillModal .win-icons .i-close', function(e){
 </main>
 </body>
 </html>
+
 
